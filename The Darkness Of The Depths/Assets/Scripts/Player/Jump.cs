@@ -19,19 +19,21 @@ public class Jump : MonoBehaviour
     bool isJumping = false;
 
     Slide slide;
+    Grappeling grapple;
 
     [SerializeField] private LayerMask platfromLayerMask;
 
     void Start()
     {
         slide = GetComponent<Slide>();
+        grapple = GetComponent<Grappeling>();
         jumpsLeft = jumps;
         bc = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
     } 
     void Update()
     {
-        if (slide.isSliding)
+        if (slide.isSliding || grapple.grappling)
             return;
         fJumpPressedRemember -= Time.deltaTime;
 

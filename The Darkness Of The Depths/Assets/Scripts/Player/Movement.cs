@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
     float accelPerSec;
 
     Slide slide;
+    Grappeling grapple;
 
     bool isMoving = false;
 
@@ -35,11 +36,12 @@ public class Movement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc = gameObject.GetComponent<BoxCollider2D>();
         slide = GetComponent<Slide>();
+        grapple = GetComponent<Grappeling>();
     }
 
     void Update()
     {
-        if (slide.isSliding)
+        if (slide.isSliding || grapple.grappling)
             return;
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f); // send direction of player
       
