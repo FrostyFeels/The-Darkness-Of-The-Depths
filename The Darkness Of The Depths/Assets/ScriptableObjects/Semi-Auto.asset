@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: SemiAuto
   weaponSprite: {fileID: 0}
   dmg: 30
-  knockBackForce: 3
+  knockBackForce: 6
   ArmorPenentration: 1
   range: 100
   fireRate: 5

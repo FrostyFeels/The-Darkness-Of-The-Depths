@@ -28,7 +28,9 @@ public class Weapon : MonoBehaviour
 
     private float angle;
 
-    public Transform firePoint;
+    public Transform firepoint;
+    public Transform RfirePoint;
+    public Transform Lfirepoint;
     public Transform mouse;
     public Transform player;
     public GameObject bulletPrefab;
@@ -56,6 +58,7 @@ public class Weapon : MonoBehaviour
         force = weapon.knockBackForce;
         autoShooting = weapon.autoShooting;
         weaponsprite = weapon.weaponSprite;
+        firepoint = RfirePoint;
 
 
 
@@ -77,6 +80,7 @@ public class Weapon : MonoBehaviour
             lookingRight = !lookingRight;
             sprite.flipY = false;
             FirePointSprite.flipY = false;
+            firepoint = RfirePoint;
 
         }
         else if (mouse.position.x < transform.position.x && !lookingRight)
@@ -84,6 +88,7 @@ public class Weapon : MonoBehaviour
             lookingRight = !lookingRight;
             sprite.flipY = true;
             FirePointSprite.flipY = true;
+            firepoint = Lfirepoint;
         }
 
         dir = (mouse.position - transform.position);
@@ -138,7 +143,7 @@ public class Weapon : MonoBehaviour
     {
         for (int i = 0; i < numberOfShots; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, firepoint.position, transform.rotation);
             bullet.transform.Rotate(0, 0, UnityEngine.Random.Range(minSpread, maxSpread));
             Bullet stats = bullet.GetComponent<Bullet>();
             stats.dmg = weapon.dmg;

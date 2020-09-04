@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Shotgun
   weaponSprite: {fileID: 0}
   dmg: 15
-  knockBackForce: 5
+  knockBackForce: 15
   ArmorPenentration: 1
   range: 15
   fireRate: 2

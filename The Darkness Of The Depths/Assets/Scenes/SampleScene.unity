@@ -3926,6 +3926,36 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &493086427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493086428}
+  m_Layer: 0
+  m_Name: 'Lfire '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &493086428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493086427}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.95, y: -0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 681484374}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,6 +4085,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1885423224}
+  - {fileID: 493086428}
   m_Father: {fileID: 1059611061}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4129,7 +4160,9 @@ MonoBehaviour:
   numberOfShots: 0
   force: 0
   autoShooting: 0
-  firePoint: {fileID: 1885423224}
+  firepoint: {fileID: 0}
+  RfirePoint: {fileID: 1885423224}
+  Lfirepoint: {fileID: 493086428}
   mouse: {fileID: 1013777064}
   player: {fileID: 1436765199}
   bulletPrefab: {fileID: 3111535816791879560, guid: 8834e162e57a01341bff4b95fa141e9d,
@@ -4646,6 +4679,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1657682010}
+  - {fileID: 1979554029}
   m_Father: {fileID: 1059611061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4670,7 +4704,9 @@ MonoBehaviour:
   numberOfShots: 0
   force: 0
   autoShooting: 0
-  firePoint: {fileID: 1657682010}
+  firepoint: {fileID: 0}
+  RfirePoint: {fileID: 1657682010}
+  Lfirepoint: {fileID: 1979554029}
   mouse: {fileID: 1013777064}
   player: {fileID: 1436765199}
   bulletPrefab: {fileID: 5379037528715660484, guid: b99979a8945b1874cb84f2b797784870,
@@ -4790,7 +4826,7 @@ GameObject:
   - component: {fileID: 1106096586}
   - component: {fileID: 1106096587}
   m_Layer: 0
-  m_Name: Firepoint
+  m_Name: Rfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4860,6 +4896,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1286965746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286965747}
+  m_Layer: 0
+  m_Name: Lfire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1286965747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286965746}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.973, y: -0.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1818415018}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322205323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,8 +5005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a08670f64109841b830bd457ddffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumps: 1
-  jumpsLeft: 0
   platfromLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -4950,6 +5014,7 @@ MonoBehaviour:
   jumpforce: 5
   maxSpeed: 17
   timeToReachMaxSpeed: 0.25
+  rotation: -3
 --- !u!114 &1436765196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5049,7 +5114,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436765193}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 4, z: 1}
   m_Children:
@@ -5057,7 +5122,7 @@ Transform:
   - {fileID: 1322205324}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
 --- !u!61 &1436765200
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5234,7 +5299,7 @@ GameObject:
   - component: {fileID: 1572648402}
   - component: {fileID: 1572648403}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Rfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5334,6 +5399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2064969109}
+  - {fileID: 2079125456}
   m_Father: {fileID: 1059611061}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5408,7 +5474,9 @@ MonoBehaviour:
   numberOfShots: 0
   force: 0
   autoShooting: 0
-  firePoint: {fileID: 2064969109}
+  firepoint: {fileID: 0}
+  RfirePoint: {fileID: 2064969109}
+  Lfirepoint: {fileID: 2079125456}
   mouse: {fileID: 1013777064}
   player: {fileID: 1436765199}
   bulletPrefab: {fileID: 1489014602712967511, guid: 39b3fa98202c82148ba9adf4945e6b0a,
@@ -5448,6 +5516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1106096586}
+  - {fileID: 1951421396}
   m_Father: {fileID: 1059611061}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5522,7 +5591,9 @@ MonoBehaviour:
   numberOfShots: 0
   force: 0
   autoShooting: 0
-  firePoint: {fileID: 1106096586}
+  firepoint: {fileID: 0}
+  RfirePoint: {fileID: 1106096586}
+  Lfirepoint: {fileID: 1951421396}
   mouse: {fileID: 1013777064}
   player: {fileID: 1436765199}
   bulletPrefab: {fileID: 3542887919601460718, guid: e6bb72bbf17e9b948bf1e133f91c420e,
@@ -5543,7 +5614,7 @@ GameObject:
   - component: {fileID: 1657682010}
   - component: {fileID: 1657682011}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Rfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5643,6 +5714,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1572648402}
+  - {fileID: 1286965747}
   m_Father: {fileID: 1059611061}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5717,7 +5789,9 @@ MonoBehaviour:
   numberOfShots: 0
   force: 0
   autoShooting: 0
-  firePoint: {fileID: 1581866589}
+  firepoint: {fileID: 0}
+  RfirePoint: {fileID: 1572648402}
+  Lfirepoint: {fileID: 1286965747}
   mouse: {fileID: 1013777064}
   player: {fileID: 1436765199}
   bulletPrefab: {fileID: 4656796626842352583, guid: e96ff6dc8da7e02478ffaf3ecd669675,
@@ -5795,7 +5869,7 @@ GameObject:
   - component: {fileID: 1885423224}
   - component: {fileID: 1885423225}
   m_Layer: 0
-  m_Name: Firepoint
+  m_Name: Rfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5910,6 +5984,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1951421395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951421396}
+  m_Layer: 0
+  m_Name: Lfire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1951421396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951421395}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.887, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589997503}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1979554028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979554029}
+  m_Layer: 0
+  m_Name: Lfire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1979554029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979554028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.83, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028870979}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2064969108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,7 +6055,7 @@ GameObject:
   - component: {fileID: 2064969109}
   - component: {fileID: 2064969110}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Rfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5991,3 +6125,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2079125455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079125456}
+  m_Layer: 0
+  m_Name: Lfire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079125456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079125455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.947, y: -0.548, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1581866589}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

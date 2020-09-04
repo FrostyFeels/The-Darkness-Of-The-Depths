@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public int jumps = 1;
-    public int jumpsLeft;
+
 
     private Rigidbody2D rb;
     private BoxCollider2D bc;
@@ -25,6 +24,7 @@ public class Movement : MonoBehaviour
 
     Slide slide;
     Grappeling grapple;
+    public float rotation;
 
     bool isMoving = false;
 
@@ -32,7 +32,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         accelPerSec = maxSpeed / timeToReachMaxSpeed;
-        jumpsLeft = jumps;
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc = gameObject.GetComponent<BoxCollider2D>();
         slide = GetComponent<Slide>();
@@ -82,16 +81,19 @@ public class Movement : MonoBehaviour
             return;
 
             if (isMoving)
-        {
+            {
+                transform.rotation = quaternion.Euler(0f, 0f , rotation * -movement.x);
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 rb.velocity = new Vector2(moveSpeed * sprintMultiplayer, rb.velocity.y);
+                
             }
             else { rb.velocity = new Vector2(moveSpeed, rb.velocity.y); }
         }
 
         if (!isMoving)
         {
+            transform.rotation = quaternion.Euler(0f, 0f, 0f);
             if (moveSpeed > 1)
             {
                 moveSpeed -= 0.5f;

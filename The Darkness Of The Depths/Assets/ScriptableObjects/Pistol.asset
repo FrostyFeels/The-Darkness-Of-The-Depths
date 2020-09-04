@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Pistol
   weaponSprite: {fileID: 0}
   dmg: 25
-  knockBackForce: 3
+  knockBackForce: 6
   ArmorPenentration: 1
   range: 30
   fireRate: 4
