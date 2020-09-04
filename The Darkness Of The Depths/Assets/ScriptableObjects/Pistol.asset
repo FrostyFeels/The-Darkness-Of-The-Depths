@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Pistol
   weaponSprite: {fileID: 0}
   dmg: 25
-  knockBackForce: 1
+  knockBackForce: 3
   ArmorPenentration: 1
   range: 30
   fireRate: 4
@@ -23,7 +23,7 @@ MonoBehaviour:
   minSpread: 0
   maxSpread: 0
   piercingReduction: 1
-  BulletSpeed: 20
+  BulletSpeed: 35
   ammo: 9
   headShotDamage: 50
   NumberOfShots: 1

@@ -6,7 +6,7 @@ public class GrappleShot : MonoBehaviour
 {
  
     private Grappeling grapple;
-    private readonly float speed = 10f;
+    public float speed = 100f;
 
     // Start is called before the first frame update
     void Start()

@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Sniper
   weaponSprite: {fileID: 0}
   dmg: 65
-  knockBackForce: 5
+  knockBackForce: 6
   ArmorPenentration: 1
   range: 100
   fireRate: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   minSpread: 0
   maxSpread: 0
   piercingReduction: 1
-  BulletSpeed: 20
+  BulletSpeed: 40
   ammo: 7
   headShotDamage: 100
   NumberOfShots: 1

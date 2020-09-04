@@ -78,9 +78,10 @@ public class Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (slide.isSliding || grapple.grappling)
+            return;
 
-
-        if (isMoving)
+            if (isMoving)
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
