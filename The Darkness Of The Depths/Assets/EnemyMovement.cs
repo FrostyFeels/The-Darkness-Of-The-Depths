@@ -11,7 +11,10 @@ public class EnemyMovement : MonoBehaviour
     public float speed;
     public float direction;
     public float range;
-    
+    public SpriteRenderer sprite;
+    private bool lookingRight;
+
+
     void Start()
     {
         
@@ -21,20 +24,39 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+        if (player.position.x > transform.position.x && lookingRight)
+        {
+            lookingRight = !lookingRight;
+            sprite.flipY = false;
+
+
+        }
+        else if (player.position.x < transform.position.x && !lookingRight)
+        {
+            lookingRight = !lookingRight;
+            sprite.flipY = true;
+
+        }
+
         direction = (transform.position.x - player.position.x);
         if(direction > 0) { direction = 1; }
         if(direction < 0) { direction = -1; }
 
-        if(transform.position.x - player.position.x > range || transform.position.x - player.position.x < -range)
+        if (transform.position.x - player.position.x < range || transform.position.x > -range)
+        {
+
+            AI.ai = EnemyAI.Ai.aiming;
+            AI.aiming = true;
+        }
+
+        if ((transform.position.x - player.position.x > range || transform.position.x - player.position.x < -range))
         {
             Debug.Log("running");
+
             AI.ai = EnemyAI.Ai.Running;
-        } else
-        {
-            AI.ai = EnemyAI.Ai.Walking;
-        }
-        
+            AI.aiming = false;
+        }      
     }
 
 

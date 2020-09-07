@@ -5,16 +5,18 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     EnemyMovement movement;
-    EnemyFire fire;
+    public EnemyFire fire;
+    public bool aiming, shooting = false;
     
 
     public enum Ai
     {
-        Walking,
+   
         Running,
         Shooting,
         Reloading,
         TakingDamage,
+        aiming,
         Dead
     }
 
@@ -23,8 +25,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         movement = GetComponent<EnemyMovement>();
-        fire = GetComponent<EnemyFire>();
-        ai = Ai.Walking;
+        ai = Ai.Running;
     }
 
     // Update is called once per frame
@@ -32,22 +33,28 @@ public class EnemyAI : MonoBehaviour
     {
         switch(ai)
         {
-            case Ai.Walking:
+            case Ai.Running:
                 movement.speed = movement.averagespeed;
                 movement.enabled = true;
-                return;
-            case Ai.Running:
-                movement.speed = movement.averagespeed * 2;
+                fire.enabled = false;
+                fire.laser = false;
                 return;
             case Ai.Shooting:
-                
+                movement.speed = 0;
+                shooting = true;
                 return;
             case Ai.Reloading:
+                movement.speed = movement.averagespeed / 2;
                 return;
             case Ai.TakingDamage:
                 return;
             case Ai.Dead:
                 Destroy(gameObject);
+                return;
+            case Ai.aiming:
+                movement.speed = movement.averagespeed / 2;
+                fire.enabled = true;
+                fire.laser = true;
                 return;
         }
 

@@ -4568,7 +4568,7 @@ GameObject:
   - component: {fileID: 819774584}
   - component: {fileID: 819774590}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4591,10 +4591,13 @@ MonoBehaviour:
   gun: {fileID: 910568349}
   bulletPrefab: {fileID: 7902117035581856678, guid: 94b2d58688dc4e34eaf1ba6dfb947197,
     type: 3}
-  range: 15
   angle: 0
+  aiming: 0
+  laser: 0
+  shooting: 0
+  timeToFire: 0.5
   line: {fileID: 910568351}
-  sprite: {fileID: 910568350}
+  ai: {fileID: 1384777060}
 --- !u!212 &819774587
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5309,7 +5312,7 @@ GameObject:
   - component: {fileID: 1384777059}
   - component: {fileID: 1384777061}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5348,7 +5351,8 @@ MonoBehaviour:
   averagespeed: 6
   speed: 6
   direction: 0
-  range: 10
+  range: 35
+  sprite: {fileID: 910568350}
 --- !u!114 &1384777060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5361,6 +5365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b029e2b1074d7824cb51105c172dad93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fire: {fileID: 819774584}
+  aiming: 0
+  shooting: 0
   ai: 0
 --- !u!50 &1384777061
 Rigidbody2D:
@@ -5420,6 +5427,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212ba5c00cc8f0845afb39b70e21f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slippery: {fileID: 6200000, guid: b0eea5fb86851d946b0bf8229a0c5951, type: 2}
+  movement: {fileID: 1436765195}
+  platfromLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &1436765195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5542,7 +5554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436765193}
   m_LocalRotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 4, z: 1}
   m_Children:
   - {fileID: 1863943591}
