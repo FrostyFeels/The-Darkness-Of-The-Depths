@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     EnemyMovement movement;
     public EnemyFire fire;
     public bool aiming, shooting = false;
+    public LineRenderer line;
     
 
     public enum Ai
@@ -37,11 +38,11 @@ public class EnemyAI : MonoBehaviour
                 movement.speed = movement.averagespeed;
                 movement.enabled = true;
                 fire.enabled = false;
-                fire.laser = false;
+                line.enabled = false;
+     
                 return;
             case Ai.Shooting:
                 movement.speed = 0;
-                shooting = true;
                 return;
             case Ai.Reloading:
                 movement.speed = movement.averagespeed / 2;
@@ -54,7 +55,7 @@ public class EnemyAI : MonoBehaviour
             case Ai.aiming:
                 movement.speed = movement.averagespeed / 2;
                 fire.enabled = true;
-                fire.laser = true;
+                line.enabled = true;
                 return;
         }
 

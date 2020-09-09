@@ -43,20 +43,26 @@ public class EnemyMovement : MonoBehaviour
         if(direction > 0) { direction = 1; }
         if(direction < 0) { direction = -1; }
 
-        if (transform.position.x - player.position.x < range || transform.position.x > -range)
-        {
+  
 
-            AI.ai = EnemyAI.Ai.aiming;
-            AI.aiming = true;
-        }
+        if (AI.aiming || AI.shooting)
+            return;
 
         if ((transform.position.x - player.position.x > range || transform.position.x - player.position.x < -range))
         {
-            Debug.Log("running");
+    
 
             AI.ai = EnemyAI.Ai.Running;
             AI.aiming = false;
-        }      
+        }
+
+        if (transform.position.x - player.position.x < range && transform.position.x - player.position.x > -range)
+        {
+           
+    
+            AI.ai = EnemyAI.Ai.aiming;
+  
+        }
     }
 
 
