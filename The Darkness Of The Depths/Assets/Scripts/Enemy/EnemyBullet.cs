@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-    public int headShotDamage;
-    public float piercingReduction;
     public float BulletSpeed;
-    public bool hasPierced = false;
     public int dmg;
     public float range;
     public Vector3 startLocation;
-
+    PlayerHealth player;
 
 
     // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
         
+    }
+    void Update()
+    {
         transform.Translate(Vector3.right * BulletSpeed * Time.deltaTime);
     }
 
@@ -29,10 +30,9 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
 
-            if (hit.collider.CompareTag("Enemy"))
+            if (hit.collider.CompareTag("Player"))
             {
-                EnemyHealth health = hit.collider.gameObject.GetComponentInParent<EnemyHealth>();
-
+                PlayerHealth health = hit.collider.gameObject.GetComponent<PlayerHealth>();
                 health.TakeDamage(dmg);
                 Destroy(gameObject);
             }

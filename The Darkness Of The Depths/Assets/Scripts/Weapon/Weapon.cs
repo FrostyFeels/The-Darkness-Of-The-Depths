@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     public float maxSpread;
     public int numberOfShots;
     public float force;
-
+    public int damage;
 
     private bool reloading;
     public bool autoShooting;
@@ -23,8 +23,8 @@ public class Weapon : MonoBehaviour
 
     private bool lookingRight;
 
-    private Vector3 dir;
-    private Vector2 weaponKnockbackDir;
+    private Vector2 dir;
+
 
     private float angle;
 
@@ -32,7 +32,6 @@ public class Weapon : MonoBehaviour
     public Transform RfirePoint;
     public Transform Lfirepoint;
     public Transform mouse;
-    public Transform player;
     public GameObject bulletPrefab;
     public Rigidbody2D rb;
 
@@ -48,6 +47,8 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        damage = weapon.dmg;
+        firepoint = RfirePoint;
         ammo = weapon.ammo;
         AS = weapon.fireRate;
         reloadSpeed = weapon.reloadSpeed;
@@ -58,11 +59,6 @@ public class Weapon : MonoBehaviour
         force = weapon.knockBackForce;
         autoShooting = weapon.autoShooting;
         weaponsprite = weapon.weaponSprite;
-        firepoint = RfirePoint;
-
-
-
-
     }
 
     private void OnEnable()
@@ -93,8 +89,6 @@ public class Weapon : MonoBehaviour
 
         dir = (mouse.position - transform.position);
         dir.Normalize();
-        weaponKnockbackDir = (mouse.position - transform.position);
-        weaponKnockbackDir.Normalize();
 
 
         angle = Mathf.Atan2(dir.y, dir.x);
@@ -145,13 +139,17 @@ public class Weapon : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, firepoint.position, transform.rotation);
             bullet.transform.Rotate(0, 0, UnityEngine.Random.Range(minSpread, maxSpread));
-            Bullet stats = bullet.GetComponent<Bullet>();
-            stats.dmg = weapon.dmg;
-            stats.speed = weapon.BulletSpeed;
+            Bullet bulletstats = bullet.GetComponent<Bullet>();
 
+            bulletstats.headShotDamage = weapon.headShotDamage;
+            bulletstats.dmg = weapon.dmg;
+            bulletstats.BulletSpeed = weapon.BulletSpeed;
+            bulletstats.range = weapon.range;
+            bulletstats.startLocation = firepoint.position;
+            bulletstats.piercingReduction = weapon.piercingReduction;
         }
         ammo--;
-        rb.velocity += -weaponKnockbackDir * force;
+        rb.velocity += -dir * force;
     }
 
 

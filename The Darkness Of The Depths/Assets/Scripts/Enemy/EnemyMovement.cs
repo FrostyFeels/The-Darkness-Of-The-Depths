@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
 
   
 
-        if (AI.aiming || AI.shooting)
+        if (AI.ai == EnemyAI.Ai.aiming || AI.ai == EnemyAI.Ai.Shooting || AI.ai == EnemyAI.Ai.Reloading)
             return;
 
         if ((transform.position.x - player.position.x > range || transform.position.x - player.position.x < -range))
@@ -53,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
     
 
             AI.ai = EnemyAI.Ai.Running;
-            AI.aiming = false;
+
         }
 
         if (transform.position.x - player.position.x < range && transform.position.x - player.position.x > -range)

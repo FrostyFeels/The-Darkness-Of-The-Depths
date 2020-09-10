@@ -6,7 +6,6 @@ public class EnemyAI : MonoBehaviour
 {
     EnemyMovement movement;
     public EnemyFire fire;
-    public bool aiming, shooting = false;
     public LineRenderer line;
     
 
@@ -37,9 +36,6 @@ public class EnemyAI : MonoBehaviour
             case Ai.Running:
                 movement.speed = movement.averagespeed;
                 movement.enabled = true;
-                fire.enabled = false;
-                line.enabled = false;
-     
                 return;
             case Ai.Shooting:
                 movement.speed = 0;
@@ -53,9 +49,8 @@ public class EnemyAI : MonoBehaviour
                 Destroy(gameObject);
                 return;
             case Ai.aiming:
-                movement.speed = movement.averagespeed / 2;
                 fire.enabled = true;
-                line.enabled = true;
+                movement.speed = movement.averagespeed / 2;
                 return;
         }
 

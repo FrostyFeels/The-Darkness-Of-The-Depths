@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: AutoRifle
   weaponSprite: {fileID: 0}
-  dmg: 10
+  dmg: 5
   knockBackForce: 2
   ArmorPenentration: 1
   range: 30

@@ -16,6 +16,7 @@ public class Grappeling : MonoBehaviour
     public Transform Player;
     public Rigidbody2D playerRB;
 
+
     private Vector3 grapplehitpos;
 
     GameObject target;
@@ -59,7 +60,7 @@ public class Grappeling : MonoBehaviour
 
         if (target != null)
         {
-            lr.SetPosition(0, Grapplestart.position);
+            lr.SetPosition(0, Player.position);
             lr.SetPosition(1, grapplehitpos);
             float dist = Vector3.Distance(grapplehitpos, Player.transform.position);
 

@@ -9,22 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be99f7c46392133419ca91f6167e0be7, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: 52a6385a4de72464f97aa590a34d0d03, type: 3}
+  m_Name: Pistol Enemy
   m_EditorClassIdentifier: 
-  weaponName: Pistol
-  weaponSprite: {fileID: 0}
-  dmg: 10
-  knockBackForce: 6
-  ArmorPenentration: 1
-  range: 30
-  fireRate: 4
+  enemyName: Pistol Enemy
+  HP: 100
+  damage: 5
+  attackRange: 35
+  movementSpeed: 6
+  Size: 1
+  armor: 3
+  AttackSpeed: 4
   reloadSpeed: 1
   minSpread: 0
   maxSpread: 0
-  piercingReduction: 1
-  BulletSpeed: 35
-  ammo: 9
-  headShotDamage: 50
+  BulletSpeed: 25
   NumberOfShots: 1
-  autoShooting: 0
+  ammo: 7
+  range: 50
