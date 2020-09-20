@@ -10,6 +10,10 @@ public class WallSliding : MonoBehaviour
     BoxCollider2D bc;
     public PhysicsMaterial2D slippery;
     public Movement movement;
+    public float  jumpTimer;
+    public float  jumpWait;
+    public bool jumped = false;
+    bool walljump = false;
     [SerializeField] private LayerMask platfromLayerMask;
     private void Start()
     {
@@ -19,12 +23,42 @@ public class WallSliding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(againstWall())
-        {
-            rb.sharedMaterial = slippery;
+        {     
+                rb.sharedMaterial = slippery;                       
         } else
         {
             rb.sharedMaterial = new PhysicsMaterial2D("Normal");
+        }
+
+        if(againstWall() && Input.GetButtonDown("Jump"))
+        {
+            movement.enabled = false;
+            walljump = true;         
+            jumped = true;
+        }
+
+        if(jumped)
+        {
+            jumpTimer += Time.deltaTime;
+            if(jumpTimer > jumpWait)
+            {
+                movement.enabled = true;
+                jumped = false;
+                jumpTimer = 0;
+            }
+        }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (walljump)
+        {
+            movement.moveSpeed = 0;
+            rb.velocity = new Vector2((-Input.GetAxisRaw("Horizontal") * 15 ), 25);
+            walljump = false;
         }
         
     }
@@ -34,12 +68,12 @@ public class WallSliding : MonoBehaviour
     {
         if (movement.movement.x > 0)
         {
-            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.right, .01f, platfromLayerMask);
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.right, .05f, platfromLayerMask);
             return raycasthit2d.collider != null;
         }
         else
         {
-            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.left, .01f, platfromLayerMask);
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.left, .05f, platfromLayerMask);
             return raycasthit2d.collider != null;
         }
 

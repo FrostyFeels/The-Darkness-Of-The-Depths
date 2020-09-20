@@ -13,4 +13,5 @@ public class RangedEnemyStats : EnemyStats
     public int NumberOfShots;
     public int ammo;
     public int range;
+ 
 }

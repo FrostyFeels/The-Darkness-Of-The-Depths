@@ -34,7 +34,7 @@ public class Grappeling : MonoBehaviour
     {
         lr = gameObject.GetComponent<LineRenderer>();
         lr.enabled = false;
-
+        Mouse = GameObject.FindGameObjectWithTag("Cursor").GetComponent<Transform>();
     }
 
 
@@ -48,7 +48,7 @@ public class Grappeling : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Shot grappeling hook");
+            
             Shoot();
         }
 

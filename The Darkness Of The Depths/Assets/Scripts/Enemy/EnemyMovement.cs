@@ -4,63 +4,123 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    
     public Transform player;
     public Rigidbody2D rb;
-    EnemyAI AI;
+    public EnemyAI AI;
+    public Transform meleeWeapon;
+    public Transform spawnPoint;
+
     public float averagespeed;
     public float speed;
     public float direction;
+    public float distance;
     public float range;
     public SpriteRenderer sprite;
     private bool lookingRight;
 
+    private EnemyRangedStatsManager rangedEnemy;
+    private EnemyMeleeStatsManager meleeEnemy;
+    public RangedEnemyStats rangedStats;
+    public MeleeEnemyStats meleeStats;
+
 
     void Start()
     {
-        
         AI = gameObject.GetComponent<EnemyAI>();
+        
+        if (AI.ranged)
+        {
+            rangedEnemy = GameObject.FindGameObjectWithTag(AI.rangedAttack.enemyName).GetComponent<EnemyRangedStatsManager>();
+            rangedStats = rangedEnemy.stats;
+            player = rangedEnemy.player.transform;
+            range = rangedStats.attackRange;
+            speed = rangedStats.movementSpeed;
+            averagespeed = rangedStats.movementSpeed;
+        }
+        else
+        {
+            meleeEnemy = GameObject.FindGameObjectWithTag(AI.meleeAttack.enemyName).GetComponent<EnemyMeleeStatsManager>();
+            meleeStats = meleeEnemy.stats;
+            player = meleeEnemy.player.transform;
+            range = meleeStats.attackRange;
+            speed = meleeStats.movementSpeed;
+            averagespeed = meleeStats.movementSpeed;
+        }
+        
+        
+        
+   
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (player.position.x > transform.position.x && lookingRight)
+        if (AI.ranged)
         {
-            lookingRight = !lookingRight;
-            sprite.flipY = false;
 
 
+            if (player.position.x > transform.position.x && lookingRight)
+            {
+                lookingRight = !lookingRight;
+                sprite.flipY = false;
+                
+
+            }
+            else if (player.position.x < transform.position.x && !lookingRight)
+            {
+                lookingRight = !lookingRight;
+                sprite.flipY = true;
+                
+            }
         }
-        else if (player.position.x < transform.position.x && !lookingRight)
+
+        if (AI.melee)
         {
-            lookingRight = !lookingRight;
-            sprite.flipY = true;
 
+
+            if (player.position.x > transform.position.x && lookingRight)
+            {
+                lookingRight = !lookingRight;
+                meleeWeapon.Rotate(0f, 0f, -180f);
+                
+
+            }
+            else if (player.position.x < transform.position.x && !lookingRight)
+            {
+                lookingRight = !lookingRight;
+                meleeWeapon.Rotate(0f, 0f, 180f);
+
+            }
         }
 
-        direction = (transform.position.x - player.position.x);
-        if(direction > 0) { direction = 1; }
-        if(direction < 0) { direction = -1; }
+        distance = (transform.position.x - player.position.x);
+        if(distance > 0) { direction = 1; }
+        if(distance < 0) { direction = -1; }
 
   
 
-        if (AI.ai == EnemyAI.Ai.aiming || AI.ai == EnemyAI.Ai.Shooting || AI.ai == EnemyAI.Ai.Reloading)
+        if (AI.ai == EnemyAI.Ai.aiming || AI.ai == EnemyAI.Ai.Attacking || AI.ai == EnemyAI.Ai.Reloading)
             return;
 
         if ((transform.position.x - player.position.x > range || transform.position.x - player.position.x < -range))
         {
-    
-
-            AI.ai = EnemyAI.Ai.Running;
-
+            speed = averagespeed * 2;
         }
 
         if (transform.position.x - player.position.x < range && transform.position.x - player.position.x > -range)
-        {
-           
-    
-            AI.ai = EnemyAI.Ai.aiming;
+        {             
+            if(AI.ranged)
+            {
+                AI.ai = EnemyAI.Ai.aiming;
+            }
+
+            if(AI.melee)
+            {
+                AI.ai = EnemyAI.Ai.Attacking;
+            }
+            
   
         }
     }

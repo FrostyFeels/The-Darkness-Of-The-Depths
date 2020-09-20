@@ -8,13 +8,13 @@ public class Slide : MonoBehaviour
     private Rigidbody2D rb;
 
     public BoxCollider2D normalCollider;
-    public BoxCollider2D slidingCollider;
 
     public float slideSpeed;
     public bool isSliding = false;
     private bool givenDirection = false;
     public float timer;
     public float wait;
+    public float rotation;
 
     Jump jump;
     Movement mv;
@@ -34,19 +34,19 @@ public class Slide : MonoBehaviour
         if (player.IsGrounded() && Input.GetKeyDown(KeyCode.S) && !isSliding)
         {
             isSliding = true;
+            transform.Rotate(0f, 0f, rotation * mv.movement.x);
             jump.enabled = false;
             mv.enabled = false;
-            normalCollider.enabled = false;
-            slidingCollider.enabled = true;
+
         }
 
         if (timer > wait && !HeadFree())
         {
+            transform.Rotate(0f, 0f, 0f);
             isSliding = false;
             jump.enabled = true;
             mv.enabled = true;
-            normalCollider.enabled = true;
-            slidingCollider.enabled = false;
+
             timer = 0f;
         }
     }

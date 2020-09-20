@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+
 public class Movement : MonoBehaviour
 {
 
@@ -10,7 +11,6 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D bc;
     [SerializeField] private LayerMask platfromLayerMask;
-
     private bool facingRight = true;
     public Vector3 movement;
 
@@ -25,8 +25,12 @@ public class Movement : MonoBehaviour
     Slide slide;
     Grappeling grapple;
     public float rotation;
+   
+    
 
     bool isMoving = false;
+
+    
 
 
     void Start()

@@ -16,7 +16,10 @@ public class Jump : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
-    bool isJumping = false;
+    bool isJumping, isChargeJumping = false;
+
+    public float timeToCharge;
+    public float chargeTime;
 
     Slide slide;
     Grappeling grapple;
@@ -25,6 +28,7 @@ public class Jump : MonoBehaviour
 
     void Start()
     {
+        
         slide = GetComponent<Slide>();
         grapple = GetComponent<Grappeling>();
         jumpsLeft = jumps;
@@ -33,6 +37,7 @@ public class Jump : MonoBehaviour
     } 
     void Update()
     {
+
         if (slide.isSliding || grapple.grappling)
             return;
         fJumpPressedRemember -= Time.deltaTime;
@@ -40,22 +45,44 @@ public class Jump : MonoBehaviour
         if (Input.GetButtonDown("Jump")) //renews timer when pressed jump
         {
             fJumpPressedRemember = fJumpPressedRememberTime;
+            
         }
 
-        if (IsGrounded() && (fJumpPressedRemember > 0)) //Checks if player is connected to the ground then changes the velocity to a value
+        if (IsGrounded() && (fJumpPressedRemember > 0 && Input.GetButtonUp("Jump"))) //Checks if player is connected to the ground then changes the velocity to a value
         {
             isJumping = true;
             fJumpPressedRemember = 0f;
-            jumpsLeft = jumps;
-
+            jumpsLeft = jumps;           
         }
-        else if (!IsGrounded() && Input.GetButtonDown("Jump") && jumpsLeft > 0) //uses the players second jump
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpsLeft = jumps;
+            isJumping = true;
+        }
+
+        if (!IsGrounded() && jumpsLeft > 0 && Input.GetButtonDown("Jump") && StaticManager.doubleJump)
+        {
+           
             isJumping = true;
             jumpsLeft--;
         }
 
-
+        if (Input.GetKey(KeyCode.X) && IsGrounded())
+        {
+            chargeTime += Time.deltaTime;
+        }                   
+        else if (chargeTime >= timeToCharge)
+        {
+            isChargeJumping = true;
+            jumpsLeft--;
+        }
+        else
+        {
+            chargeTime = 0f;
+        }
+     
+     
         if (rb.velocity.y < 0)
         {
             rb.gravityScale = fallMultiplier;
@@ -74,8 +101,15 @@ public class Jump : MonoBehaviour
     {
         if (isJumping)
         {
+            
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             isJumping = false;
+        }
+        if(isChargeJumping)
+        {
+            chargeTime = 0;
+            isChargeJumping = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce * 2);
         }
     }
 

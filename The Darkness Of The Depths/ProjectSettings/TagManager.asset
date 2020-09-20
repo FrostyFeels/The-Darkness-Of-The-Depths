@@ -8,6 +8,14 @@ TagManager:
   - Wall
   - Enemy
   - GrappleBullet
+  - PistolEnemy
+  - AutoEnemy
+  - Semi-AutoEnemy
+  - ShotGun
+  - Sniper
+  - Melee
+  - Tank
+  - Cursor
   layers:
   - Default
   - TransparentFX
@@ -21,16 +29,16 @@ TagManager:
   - Wall
   - Player
   - AIblock
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - DoubleJump
+  - WallJump
+  - BoostJump
+  - GrappleHook
+  - spawnArea
+  - doubleJumpArea
+  - boostJumpArea
+  - grappleHookArea
+  - wallJumpArea
   - 
   - 
   - 

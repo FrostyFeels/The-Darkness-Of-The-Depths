@@ -17,12 +17,6 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        transform.Translate(Vector3.right * BulletSpeed * Time.deltaTime);
-    }
-
-    void FixedUpdate()
-    {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .5f);
 
         if (hit.collider != null)
@@ -32,7 +26,7 @@ public class Bullet : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 EnemyHealth health = hit.collider.gameObject.GetComponentInParent<EnemyHealth>();
-
+                Debug.Log(hit.collider.name);
                 health.TakeDamage(dmg);
                 Destroy(gameObject);
             }
@@ -44,5 +38,12 @@ public class Bullet : MonoBehaviour
             }
 
         }
+
+    }
+
+    void FixedUpdate()
+    {
+
+        transform.Translate(Vector3.right * BulletSpeed * Time.fixedDeltaTime);
     }
 }

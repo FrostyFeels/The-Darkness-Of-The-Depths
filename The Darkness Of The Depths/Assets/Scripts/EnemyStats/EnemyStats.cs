@@ -11,5 +11,7 @@ public class EnemyStats : ScriptableObject
     public float movementSpeed;
     public float Size;
     public int armor;
+    public Sprite weaponSprite;
+
 
 }

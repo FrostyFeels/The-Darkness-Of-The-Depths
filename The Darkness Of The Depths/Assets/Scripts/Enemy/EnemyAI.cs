@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    EnemyMovement movement;
-    public EnemyFire fire;
-    public LineRenderer line;
+    public bool ranged;
+    public bool melee;
+    public EnemyMovement movement;
+    public RangedAttack rangedAttack;
+    public MeleeAttack meleeAttack;
+    
     
 
     public enum Ai
-    {
-   
+    { 
         Running,
-        Shooting,
+        Attacking,       
         Reloading,
-        TakingDamage,
         aiming,
+        TakingDamage, 
         Dead
     }
 
@@ -36,21 +38,35 @@ public class EnemyAI : MonoBehaviour
             case Ai.Running:
                 movement.speed = movement.averagespeed;
                 movement.enabled = true;
+                if(ranged)
+                {
+                    rangedAttack.enabled = false;
+                }
+                if(melee)
+                {
+                    meleeAttack.enabled = false;
+                }
                 return;
-            case Ai.Shooting:
+            case Ai.aiming:
+                rangedAttack.enabled = true;                          
+                movement.speed = movement.averagespeed / 2;               
+                return;
+            case Ai.Attacking:
+                if(melee)
+                {
+                    meleeAttack.enabled = true;
+                    meleeAttack.attacking = true;
+                }
                 movement.speed = 0;
                 return;
             case Ai.Reloading:
                 movement.speed = movement.averagespeed / 2;
                 return;
-            case Ai.TakingDamage:
+            case Ai.TakingDamage:                
                 return;
             case Ai.Dead:
+               
                 Destroy(gameObject);
-                return;
-            case Ai.aiming:
-                fire.enabled = true;
-                movement.speed = movement.averagespeed / 2;
                 return;
         }
 
