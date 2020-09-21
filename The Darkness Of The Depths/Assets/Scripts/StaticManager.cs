@@ -19,7 +19,8 @@ public static class StaticManager
             case"DoubleJump":
                 return doubleJump;
             case "WallJump":
-                return wallJump;
+                Debug.Log(wallJump);
+                return wallJump;            
             case "BoostJump":
                 return powerJump;
             case "GrappleHook":
@@ -103,7 +104,9 @@ public static class StaticManager
             case "GrappleHook":
                 grappleHook = true;
                 break;
+                
         }
+        Debug.Log(weaponName);
     }
 
 
