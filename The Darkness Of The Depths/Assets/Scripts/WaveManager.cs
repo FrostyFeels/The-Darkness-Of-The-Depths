@@ -1,57 +1,141 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
+
 
 public class WaveManager : MonoBehaviour
 {
 
     public int waveNumber;
     bool nextWave = true;
-    public int numberOfRanged, numberOfMelee, numberOfSniper, numberOfTanks;
-    public GameObject[] rangedPrefab = new GameObject[2];
+
+    public GameObject[] rangedPrefab = new GameObject[1];
     public GameObject tank;
     public GameObject melee;
-    public int killsNeeded;
-    public int kill;
-    
+    public GameObject sniper;
+    public int killsNeeded, kill;
+    public GameObject doorlight;
+
+
+    public bool nextSpawn;
+    public int numberOfRanged, numberOfMelee, numberOfSniper, numberOfTanks;
+    public int spawnedRanged, spawnedMelee, spawnedSniper, spawnedTanks;
+
+
     public List<Transform> SpawnLocations = new List<Transform>();
 
 
     private void Start()
     {
         killsNeeded = numberOfMelee + numberOfRanged + numberOfTanks + numberOfSniper;
+        doorlight.SetActive(false);
     }
 
     public void LateUpdate()
     {
         if(nextWave)
         {
-            SpawnWave();
-            nextWave = false;
-            waveNumber++;
+            spawnedMelee = 0;
+            spawnedRanged = 0;
+            spawnedSniper = 0;
+            spawnedTanks = 0;
+
+            
+            numberOfMelee = 2 + waveNumber * 2;
+            numberOfRanged = 2 + waveNumber;
+            //numberOfTanks = 1 + waveNumber;
+            //numberOfSniper = 1 + waveNumber;
             kill = 0;
+            killsNeeded = numberOfMelee + numberOfRanged + numberOfTanks + numberOfSniper;
+
+            SpawnMelee();
+            SpawnRanged();
+            SpawnSniper();
+            SpawnTank();
+            
+            nextWave = false;
+            
+
         }
 
         if(kill >= killsNeeded)
         {
-            nextWave = true;
+            if(waveNumber < 2)
+            {
+                nextWave = true;
+                waveNumber++;
+                
+            } else
+            {
+                doorlight.SetActive(true);
+            }
+  
         }
+
+
     }
 
-    public void SpawnWave()
+    public void SpawnMelee()
     {
-        for (int i = 0; i < numberOfMelee; i++)
+        GameObject meleeEnemy = Instantiate(melee, SpawnLocations[Random.Range(0, SpawnLocations.Count)].position, Quaternion.identity);
+        spawnedMelee++;
+        StartCoroutine(meleeCDR());
+    }
+
+    public void SpawnRanged()
+    {
+        int i = Random.Range(0, rangedPrefab.Length);
+        GameObject rangedEnemy = Instantiate(rangedPrefab[i], SpawnLocations[Random.Range(0, SpawnLocations.Count)].position , Quaternion.identity);
+        spawnedRanged++;
+        StartCoroutine(RangedCDR());
+    }
+    public void SpawnSniper()
+    {
+        //GameObject sniperEnemy = Instantiate(sniper, SpawnLocations[Random.Range(0, SpawnLocations.Count)].position , Quaternion.identity);
+        spawnedSniper++;
+        StartCoroutine(SniperCDR());
+    }
+    public void SpawnTank()
+    {
+        //GameObject tankEnemy = Instantiate(tank, SpawnLocations[Random.Range(0, SpawnLocations.Count)].position, Quaternion.identity);
+        spawnedTanks++;
+        StartCoroutine(TankCDR());
+    }
+
+    IEnumerator meleeCDR()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if(spawnedMelee < numberOfMelee)
         {
-            GameObject meleeEnemy = Instantiate(melee, SpawnLocations[Random.Range(0,SpawnLocations.Count)]);
+            Debug.Log("Spawned");
+            SpawnMelee();
         }
-        for (int i = 0; i < numberOfRanged; i++)
+       
+    }
+    IEnumerator RangedCDR()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if (spawnedRanged < numberOfRanged)
         {
-            GameObject rangedEnemy = Instantiate(rangedPrefab[Random.Range(0, rangedPrefab.Length)], SpawnLocations[Random.Range(0,SpawnLocations.Count)]);
+            Debug.Log("Spawned");
+            SpawnRanged();
         }
-        for (int i = 0; i < numberOfTanks; i++)
+    }
+    IEnumerator SniperCDR()
+    {
+        yield return new WaitForSeconds(1f);
+        if (spawnedSniper < numberOfSniper)
         {
-            //Spawn Tanks
+            SpawnSniper();
+        }
+    }
+    IEnumerator TankCDR()
+    {
+        yield return new WaitForSeconds(1f);
+        if (spawnedTanks < numberOfTanks)
+        {
+            SpawnTank();
         }
     }
 

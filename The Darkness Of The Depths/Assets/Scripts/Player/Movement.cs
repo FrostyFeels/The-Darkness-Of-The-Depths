@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
 
     private Rigidbody2D rb;
     private BoxCollider2D bc;
+    public Transform body;
     [SerializeField] private LayerMask platfromLayerMask;
     private bool facingRight = true;
     public Vector3 movement;
@@ -37,15 +38,15 @@ public class Movement : MonoBehaviour
     {
         accelPerSec = maxSpeed / timeToReachMaxSpeed;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        bc = gameObject.GetComponent<BoxCollider2D>();
-        slide = GetComponent<Slide>();
-        grapple = GetComponent<Grappeling>();
+        bc = gameObject.GetComponentInChildren<BoxCollider2D>();
+        slide = GetComponentInChildren<Slide>();
+        grapple = GetComponentInChildren<Grappeling>();
     }
 
     void Update()
     {
-        if (slide.isSliding || grapple.grappling)
-            return;
+/*        if (slide.isSliding || grapple.grappling)
+            return;*/
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f); // send direction of player
       
             if (movement.x > 0)
@@ -81,12 +82,12 @@ public class Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (slide.isSliding || grapple.grappling)
-            return;
+/*        if (slide.isSliding || grapple.grappling)
+            return;*/
 
             if (isMoving)
             {
-                transform.rotation = quaternion.Euler(0f, 0f , rotation * -movement.x);
+                body.transform.rotation = quaternion.Euler(0f, 0f , rotation * -movement.x);
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 rb.velocity = new Vector2(moveSpeed * sprintMultiplayer, rb.velocity.y);
@@ -97,7 +98,7 @@ public class Movement : MonoBehaviour
 
         if (!isMoving)
         {
-            transform.rotation = quaternion.Euler(0f, 0f, 0f);
+            body.transform.rotation = quaternion.Euler(0f, 0f, 0f);
             if (moveSpeed > 1)
             {
                 moveSpeed -= 0.5f;

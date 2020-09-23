@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: AutoRifleEnemy
   m_EditorClassIdentifier: 
   enemyName: 
-  HP: 150
-  damage: 7
+  HP: 125
+  damage: 5
   attackRange: 45
   movementSpeed: 6
   Size: 1
   armor: 5
+  weaponSprite: {fileID: 21300000, guid: 99bd8558fad1b924e979fb863ef9f080, type: 3}
   AttackSpeed: 5
   reloadSpeed: 3
   minSpread: 0
@@ -27,5 +28,3 @@ MonoBehaviour:
   NumberOfShots: 1
   ammo: 15
   range: 45
-  test: 0
-  weaponSprite: {fileID: 21300000, guid: 99bd8558fad1b924e979fb863ef9f080, type: 3}

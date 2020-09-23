@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sniper
   weaponSprite: {fileID: 0}
-  dmg: 25
+  dmg: 100
   knockBackForce: 18
   ArmorPenentration: 1
   range: 100
@@ -28,3 +28,4 @@ MonoBehaviour:
   headShotDamage: 100
   NumberOfShots: 1
   autoShooting: 0
+  lifeSteal: 35

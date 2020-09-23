@@ -15,4 +15,5 @@ public class RangedWeaponStats : WeaponStats
     public int headShotDamage;
     public int NumberOfShots;
     public bool autoShooting;
+    public int lifeSteal;
 }

@@ -10,6 +10,6 @@ public class EnemyMeleeStatsManager : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("SpiderPlayer").transform;
     }
 }

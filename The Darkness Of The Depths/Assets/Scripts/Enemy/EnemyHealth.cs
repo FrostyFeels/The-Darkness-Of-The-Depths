@@ -9,7 +9,8 @@ public class EnemyHealth : MonoBehaviour
     public EnemyRangedStatsManager rangedStats;
     public EnemyMeleeStatsManager meleeStats;
     private EnemyMovement enemyMove;
-
+    Rigidbody2D rb;
+    public GameObject healthPrefab;
     public float health;
     public float maxHealth;
     public float regen;
@@ -17,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
         ai = gameObject.GetComponent<EnemyAI>();
         manager = GameObject.Find("SpawnManager").GetComponent<WaveManager>();
         if (ai.ranged)
@@ -39,25 +40,38 @@ public class EnemyHealth : MonoBehaviour
   
 
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 dir, float force)
     {
         health -= (damage - armor);
-      
+        enemyMove.enabled = false;
+        rb.velocity = Vector2.zero;
+        rb.velocity += dir * force;
+        StartCoroutine(NotGettingKnockbacked());
     }
 
     public void GetHP(int healthAmount)
     {
         health += healthAmount;
+        
     }
 
     public void Injured()
     {
         enemyMove.averagespeed = 3;
+        StartCoroutine(NotInjured());
     }
 
-    public void NotInjured()
+    IEnumerator NotInjured()
     {
+        yield return new WaitForSeconds(3f);
         enemyMove.averagespeed = 6;
+    }
+
+    IEnumerator NotGettingKnockbacked()
+    {
+        yield return new WaitForSeconds(.5f);
+        Injured();
+        enemyMove.enabled = true;
     }
 
 
@@ -73,8 +87,16 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health <= 0)
         {
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject health = Instantiate(healthPrefab, transform.position + new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0f), Quaternion.identity);
+                Debug.Log(i);
+            }
             manager.kill++; 
             Destroy(gameObject);
         }
     }
+
+
+
 }

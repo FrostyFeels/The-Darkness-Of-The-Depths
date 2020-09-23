@@ -32,7 +32,7 @@ public class Jump : MonoBehaviour
         slide = GetComponent<Slide>();
         grapple = GetComponent<Grappeling>();
         jumpsLeft = jumps;
-        bc = GetComponent<BoxCollider2D>();
+        bc = GetComponentInChildren<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
     } 
     void Update()

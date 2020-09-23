@@ -25,7 +25,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void GetHP(int healthAmount)
     {
-        health += healthAmount;
+        if(health + healthAmount <= maxHealth)
+        {
+            health += healthAmount;
+        }
+        else
+        {
+            health = maxHealth;
+        }
+        
     }
 
     public void Injured()

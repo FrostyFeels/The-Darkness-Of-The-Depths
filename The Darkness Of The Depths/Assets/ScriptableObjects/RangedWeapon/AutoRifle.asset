@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: AutoRifle
   weaponSprite: {fileID: 0}
-  dmg: 5
+  dmg: 18
   knockBackForce: 2
   ArmorPenentration: 1
   range: 30
@@ -24,7 +24,8 @@ MonoBehaviour:
   maxSpread: 5
   piercingReduction: 1
   BulletSpeed: 35
-  ammo: 27
+  ammo: 28
   headShotDamage: 50
   NumberOfShots: 1
   autoShooting: 1
+  lifeSteal: 25

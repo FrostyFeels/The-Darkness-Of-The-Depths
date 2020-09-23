@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MeleeEnemy
   m_EditorClassIdentifier: 
   enemyName: MeleeEnemy
-  HP: 200
-  damage: 25
+  HP: 150
+  damage: 15
   attackRange: 8
   movementSpeed: 8
   Size: 1

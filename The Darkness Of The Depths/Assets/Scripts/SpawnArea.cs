@@ -13,10 +13,13 @@ public class SpawnArea : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(gameObject.name + " and " + StaticManager.activeArea.name);
         if (GameObject.ReferenceEquals(gameObject, StaticManager.activeArea) || GameObject.ReferenceEquals(gameObject, StaticManager.secondArea))
         {
+            
             foreach (Transform aSpawnSpot in transform)
-            {             
+            {
+                
                 if(spawn.SpawnLocations.Contains(aSpawnSpot) != aSpawnSpot.transform)
                 {
                     spawn.SpawnLocations.Add(aSpawnSpot);

@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public bool hasPierced = false;
     public int dmg;
     public float range;
+    public float force;
+    public Vector2 dir;
     public Vector3 startLocation;
 
 
@@ -21,13 +23,13 @@ public class Bullet : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
+       
 
             if (hit.collider.CompareTag("Enemy"))
             {
                 EnemyHealth health = hit.collider.gameObject.GetComponentInParent<EnemyHealth>();
-                Debug.Log(hit.collider.name);
-                health.TakeDamage(dmg);
+            
+                health.TakeDamage(dmg, dir, force);
                 Destroy(gameObject);
             }
 

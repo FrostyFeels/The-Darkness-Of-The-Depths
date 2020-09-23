@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Sniper
   HP: 50
-  damage: 25
+  damage: 20
   attackRange: 100
   movementSpeed: 3
   Size: 1
   armor: 1
+  weaponSprite: {fileID: 21300000, guid: 895d38c1c779a684aa87852e537a2ffa, type: 3}
   AttackSpeed: 0.25
   reloadSpeed: 5
   minSpread: 0
@@ -27,5 +28,3 @@ MonoBehaviour:
   NumberOfShots: 1
   ammo: 4
   range: 100
-  test: 0
-  weaponSprite: {fileID: 21300000, guid: 895d38c1c779a684aa87852e537a2ffa, type: 3}

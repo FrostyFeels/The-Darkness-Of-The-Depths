@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   weaponSprite: {fileID: 0}
-  dmg: 60
+  dmg: 17
   knockBackForce: 15
   ArmorPenentration: 1
   range: 15
@@ -26,5 +26,6 @@ MonoBehaviour:
   BulletSpeed: 35
   ammo: 7
   headShotDamage: 25
-  NumberOfShots: 5
+  NumberOfShots: 7
   autoShooting: 0
+  lifeSteal: 25

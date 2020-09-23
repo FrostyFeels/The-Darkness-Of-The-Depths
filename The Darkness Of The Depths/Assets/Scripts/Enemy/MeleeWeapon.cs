@@ -27,7 +27,7 @@ public class MeleeWeapon : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                
-                PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();                
+                PlayerHealth health = collision.gameObject.GetComponentInParent<PlayerHealth>();                
                 ai.ai = EnemyAI.Ai.Reloading;
                 health.TakeDamage(dmg);
             }

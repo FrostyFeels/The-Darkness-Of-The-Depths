@@ -6,21 +6,30 @@ public class BuyScript : MonoBehaviour
 {
     public GameObject text;
     public string weaponName;
+    public string otherWeaponName;
 
-
+    public void Start()
+    {
+        otherWeaponName = gameObject.name;
+        if (StaticManager.CheckWeaponUnlock(otherWeaponName))
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             text.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.X))
+            if(Input.GetKey(KeyCode.X))
             {
                 if(StaticManager.unlocksLeft > 0)
                 {
                     Debug.Log(weaponName);
                     StaticManager.UnlockWeapon(weaponName);
                     StaticManager.unlocksLeft--;
+                    
                     text.SetActive(false);
                     gameObject.SetActive(false);
                 }

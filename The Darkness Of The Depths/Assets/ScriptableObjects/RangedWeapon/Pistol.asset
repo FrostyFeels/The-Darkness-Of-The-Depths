@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Pistol
   weaponSprite: {fileID: 0}
-  dmg: 10
+  dmg: 35
   knockBackForce: 6
   ArmorPenentration: 1
   range: 30
@@ -28,3 +28,4 @@ MonoBehaviour:
   headShotDamage: 50
   NumberOfShots: 1
   autoShooting: 0
+  lifeSteal: 0

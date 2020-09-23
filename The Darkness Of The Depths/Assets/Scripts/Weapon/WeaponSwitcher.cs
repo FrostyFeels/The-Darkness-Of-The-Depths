@@ -5,9 +5,13 @@ using UnityEngine;
 public class WeaponSwitcher : MonoBehaviour
 {
     int currentWeapon = 0;
+    string weaponName;
 
     public GameObject player;
     private Rigidbody2D rb;
+    public PlayerStatsUI UI;
+    private bool scrollUp;
+    public int pistolWeapon;
     void Start()
     {
         SelectWeapon();
@@ -21,31 +25,25 @@ public class WeaponSwitcher : MonoBehaviour
     {
         transform.position = rb.position;
         int prevWeapon = currentWeapon;
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if(StaticManager.HasBoughAWeapon)
         {
-            if (currentWeapon >= transform.childCount - 1)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                currentWeapon = 0;
-            }
-            else
-            {
-                currentWeapon++;
+                if (currentWeapon >= transform.childCount - 1)
+                {
+                    currentWeapon = 0;
+                    scrollUp = true;
+                }
+                else
+                {
+                    scrollUp = true;
+                    currentWeapon++;
+                }
+
             }
 
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (currentWeapon <= 0)
-            {
-                currentWeapon = transform.childCount - 1;
-            }
-            else
-            {
-                currentWeapon--;
-            }
-        }
         if (prevWeapon != currentWeapon)
         {
             SelectWeapon();
@@ -60,7 +58,24 @@ public class WeaponSwitcher : MonoBehaviour
         {
             if (i == currentWeapon)
             {
-                aweapon.gameObject.SetActive(true);
+                weaponName = aweapon.gameObject.name;
+                if (StaticManager.CheckWeaponUnlock(weaponName))
+                {
+                    aweapon.gameObject.SetActive(true);
+                    UI.weapon = aweapon.gameObject.GetComponent<Weapon>();
+                } 
+                else
+                {   
+                        if (currentWeapon >= transform.childCount - 1)
+                        {
+                            currentWeapon = 0;
+                        }
+                        else
+                        {
+                            currentWeapon++;
+
+                        }                                           
+                }
             }
             else
             {
@@ -68,8 +83,6 @@ public class WeaponSwitcher : MonoBehaviour
             }
             i++;
         }
-        {
 
-        }
     }
 }

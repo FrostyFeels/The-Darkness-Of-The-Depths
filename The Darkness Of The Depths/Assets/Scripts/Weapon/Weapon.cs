@@ -42,11 +42,13 @@ public class Weapon : MonoBehaviour
     public RangedWeaponStats weapon;
 
 
+    public PlayerHealth health;
 
 
 
     private void Start()
     {
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         damage = weapon.dmg;
         firepoint = RfirePoint;
         ammo = weapon.ammo;
@@ -147,6 +149,8 @@ public class Weapon : MonoBehaviour
             bulletstats.range = weapon.range;
             bulletstats.startLocation = firepoint.position;
             bulletstats.piercingReduction = weapon.piercingReduction;
+            bulletstats.force = force;
+            bulletstats.dir = dir;
         }
         ammo--;
         rb.velocity += -dir * force;
@@ -156,6 +160,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
+        health.TakeDamage(weapon.lifeSteal);
         reloading = true;
         yield return new WaitForSeconds(reloadSpeed);
 

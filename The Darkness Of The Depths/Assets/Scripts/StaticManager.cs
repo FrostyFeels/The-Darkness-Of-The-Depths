@@ -10,6 +10,8 @@ public static class StaticManager
     public static GameObject activeArea, secondArea;
     public static bool newArea = false;
     public static int unlocksLeft = 2;
+    public static bool pistol = true;
+    public static bool HasBoughAWeapon = false;
 
     
     public static bool SelectDoorType(string doorName)
@@ -19,7 +21,6 @@ public static class StaticManager
             case"DoubleJump":
                 return doubleJump;
             case "WallJump":
-                Debug.Log(wallJump);
                 return wallJump;            
             case "BoostJump":
                 return powerJump;
@@ -71,7 +72,7 @@ public static class StaticManager
                 wallJumpArea = area;
                 break;
         }
-        Debug.Log("AreaName obj: " + area.name + "AreaName: " + areaName);
+
     }
     public static void UnlockWeapon(string weaponName)
     {
@@ -79,15 +80,19 @@ public static class StaticManager
         {
             case "Shotgun":
                 shotgun = true;
+                HasBoughAWeapon = true;
                 break;
             case "Sniper":
                 sniper = true;
+                HasBoughAWeapon = true;
                 break;
             case "AutoRifle":
                 autoRifle = true;
+                HasBoughAWeapon = true;
                 break;
             case "SemiAutoRifle":
                 semiAutoRifle = true;
+                HasBoughAWeapon = true;
                 break;
             case "Slide":
                 slide = true;
@@ -107,6 +112,25 @@ public static class StaticManager
                 
         }
         Debug.Log(weaponName);
+    }
+
+
+    public static bool CheckWeaponUnlock(string doorName)
+    {
+        switch (doorName)
+        {
+            case "Shotgun":
+                return shotgun;
+            case "Sniper":
+                return sniper;
+            case "Semi":
+                return semiAutoRifle;
+            case "Auto":
+                return autoRifle;
+            case "Pistol":
+                return pistol;
+        }
+        return false;
     }
 
 

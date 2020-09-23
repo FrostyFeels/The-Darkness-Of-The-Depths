@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SemiAuto
   weaponSprite: {fileID: 0}
-  dmg: 9
+  dmg: 25
   knockBackForce: 6
   ArmorPenentration: 1
   range: 100
@@ -28,3 +28,4 @@ MonoBehaviour:
   headShotDamage: 75
   NumberOfShots: 1
   autoShooting: 0
+  lifeSteal: 15

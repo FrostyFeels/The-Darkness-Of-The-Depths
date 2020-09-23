@@ -17,7 +17,7 @@ public class WallSliding : MonoBehaviour
     [SerializeField] private LayerMask platfromLayerMask;
     private void Start()
     {
-        bc = GetComponent<BoxCollider2D>();
+        bc = GetComponentInChildren<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class WallSliding : MonoBehaviour
             rb.sharedMaterial = new PhysicsMaterial2D("Normal");
         }
 
-        if(againstWall() && Input.GetButtonDown("Jump"))
+        if(againstWall() && Input.GetButtonDown("Jump") && StaticManager.wallJump)
         {
             movement.enabled = false;
             walljump = true;         
