@@ -42,7 +42,7 @@ public class WaveManager : MonoBehaviour
             spawnedTanks = 0;
 
             
-            numberOfMelee = 2 + waveNumber * 2;
+            numberOfMelee = 2 + waveNumber;
             numberOfRanged = 2 + waveNumber;
             //numberOfTanks = 1 + waveNumber;
             //numberOfSniper = 1 + waveNumber;

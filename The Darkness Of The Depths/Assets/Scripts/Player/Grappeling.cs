@@ -46,7 +46,7 @@ public class Grappeling : MonoBehaviour
         angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Grapplestart.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && StaticManager.grappleHook)
         {
             
             Shoot();

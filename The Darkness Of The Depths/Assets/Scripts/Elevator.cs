@@ -20,7 +20,7 @@ public class Elevator : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = collision.gameObject.GetComponentInParent<Rigidbody2D>();
             rb.gravityScale = 3;
         }
     }

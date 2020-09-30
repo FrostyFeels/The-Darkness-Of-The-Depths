@@ -12,7 +12,7 @@ public class AreaUnlock : MonoBehaviour
     {
         if (StaticManager.SelectDoorType(doorName) && gameObject.layer == LayerMask.NameToLayer(doorName))
         {
-            gameObject.active = false;
+            gameObject.SetActive(false);
         }
 
     }

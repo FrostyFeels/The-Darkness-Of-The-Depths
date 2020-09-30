@@ -17,7 +17,7 @@ public class ShopEntry : MonoBehaviour
                 {
                     Debug.Log("LET ME LEAVE");
                     StaticManager.unlocksLeft = 2;
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene("Shop");
                 }
 
                 
@@ -25,13 +25,8 @@ public class ShopEntry : MonoBehaviour
 
             if (Input.GetKey(KeyCode.C))
             {
-  
-        
                     SceneManager.LoadScene(1);
-                StaticManager.unlocksLeft = 2;
-
-
-
+                    StaticManager.unlocksLeft = 2;
             }
         }
     }

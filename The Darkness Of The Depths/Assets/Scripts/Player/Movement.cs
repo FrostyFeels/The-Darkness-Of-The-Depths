@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 
     Slide slide;
     Grappeling grapple;
+    //Blocking block;
     public float rotation;
    
     
@@ -36,6 +37,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        //block = GetComponent<Blocking>();
         accelPerSec = maxSpeed / timeToReachMaxSpeed;
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc = gameObject.GetComponentInChildren<BoxCollider2D>();
@@ -45,8 +47,8 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-/*        if (slide.isSliding || grapple.grappling)
-            return;*/
+        if (slide.isSliding || grapple.grappling)
+            return;
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f); // send direction of player
       
             if (movement.x > 0)
@@ -73,19 +75,22 @@ public class Movement : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0 && !facingRight)
         {
             Flip();
+            //block.blockLocation = block.leftBlock;
         }
         if (Input.GetAxis("Horizontal") < 0 && facingRight)
         {
+            
             Flip();
+            //block.blockLocation = block.rightBlock;
         }
 
     }
     private void FixedUpdate()
     {
-/*        if (slide.isSliding || grapple.grappling)
-            return;*/
+        if (slide.isSliding || grapple.grappling)
+            return;
 
-            if (isMoving)
+        if (isMoving)
             {
                 body.transform.rotation = quaternion.Euler(0f, 0f , rotation * -movement.x);
             if (Input.GetKey(KeyCode.LeftShift))
@@ -118,7 +123,7 @@ public class Movement : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(0f, 360f, 0f);
-
+    
 
     }
     public bool IsGrounded()

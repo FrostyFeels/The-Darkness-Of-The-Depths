@@ -31,24 +31,29 @@ public class Slide : MonoBehaviour
     }
     void Update()
     {
-        if (player.IsGrounded() && Input.GetKeyDown(KeyCode.S) && !isSliding)
-        {
-            isSliding = true;
-            transform.Rotate(0f, 0f, rotation * mv.movement.x);
-            jump.enabled = false;
-            mv.enabled = false;
 
+        if (StaticManager.slide)
+        {
+            if (player.IsGrounded() && Input.GetKeyDown(KeyCode.S) && !isSliding)
+            {
+                isSliding = true;
+                transform.Rotate(0f, 0f, rotation * mv.movement.x);
+                jump.enabled = false;
+                mv.enabled = false;
+
+            }
+
+            if (timer > wait && !HeadFree())
+            {
+                transform.Rotate(0f, 0f, 0f);
+                isSliding = false;
+                jump.enabled = true;
+                mv.enabled = true;
+
+                timer = 0f;
+            }
         }
 
-        if (timer > wait && !HeadFree())
-        {
-            transform.Rotate(0f, 0f, 0f);
-            isSliding = false;
-            jump.enabled = true;
-            mv.enabled = true;
-
-            timer = 0f;
-        }
     }
     void FixedUpdate()
     {
