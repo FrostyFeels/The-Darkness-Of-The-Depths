@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2130499461
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0157d1a4a5536fd4395bbc80e4ad8d8c, type: 3}
   m_Color: {r: 0, g: 1, b: 0.11830664, a: 1}
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.01, y: 0.01}
   m_EdgeRadius: 0
 --- !u!114 &4274754313450267459
 MonoBehaviour:
@@ -143,5 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c68e4fd44d8eb340ae490a0232795f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  headShotDamage: 0
+  piercingReduction: 0
+  BulletSpeed: 0
+  hasPierced: 0
   dmg: 1
+  range: 0
+  force: 0
+  dir: {x: 0, y: 0}
+  startLocation: {x: 0, y: 0, z: 0}

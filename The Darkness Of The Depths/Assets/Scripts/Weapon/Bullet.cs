@@ -22,25 +22,33 @@ public class Bullet : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .5f);
 
         if (hit.collider != null)
-        {
-       
-
+        {     
             if (hit.collider.CompareTag("Enemy"))
             {
-                EnemyHealth health = hit.collider.gameObject.GetComponentInParent<EnemyHealth>();
-            
+                EnemyHealth health = hit.collider.gameObject.GetComponentInParent<EnemyHealth>();           
                 health.TakeDamage(dmg, dir, force);
                 Destroy(gameObject);
             }
-
-
             if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor"))
             {
                 Destroy(gameObject);
             }
-
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            EnemyHealth health = collision.gameObject.GetComponentInParent<EnemyHealth>();
+            health.TakeDamage(dmg, dir, force);
+            Destroy(gameObject);
+        }
+        if (collision.CompareTag("Wall") || collision.CompareTag("Floor"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()

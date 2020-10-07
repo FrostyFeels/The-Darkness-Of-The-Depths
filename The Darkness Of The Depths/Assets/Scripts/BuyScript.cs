@@ -7,6 +7,7 @@ public class BuyScript : MonoBehaviour
     public GameObject text;
     public string weaponName;
     public string otherWeaponName;
+    public TextLocation canvas; 
 
     public void Start()
     {
@@ -29,7 +30,7 @@ public class BuyScript : MonoBehaviour
                     Debug.Log(weaponName);
                     StaticManager.UnlockWeapon(weaponName);
                     StaticManager.unlocksLeft--;
-                    
+                    canvas.SpawnText(weaponName);
                     text.SetActive(false);
                     gameObject.SetActive(false);
                 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
 
-    public int waveNumber;
+    public int waveNumber, maxWave;
     bool nextWave = true;
 
     public GameObject[] rangedPrefab = new GameObject[1];
@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
     public GameObject melee;
     public GameObject sniper;
     public int killsNeeded, kill;
+    public GameObject door;
     public GameObject doorlight;
 
 
@@ -24,6 +25,8 @@ public class WaveManager : MonoBehaviour
 
 
     public List<Transform> SpawnLocations = new List<Transform>();
+
+
 
 
     private void Start()
@@ -42,8 +45,8 @@ public class WaveManager : MonoBehaviour
             spawnedTanks = 0;
 
             
-            numberOfMelee = 2 + waveNumber;
-            numberOfRanged = 2 + waveNumber;
+            numberOfMelee = 1 + waveNumber;
+            numberOfRanged = 1 + waveNumber;
             //numberOfTanks = 1 + waveNumber;
             //numberOfSniper = 1 + waveNumber;
             kill = 0;
@@ -61,7 +64,7 @@ public class WaveManager : MonoBehaviour
 
         if(kill >= killsNeeded)
         {
-            if(waveNumber < 2)
+            if(waveNumber < maxWave)
             {
                 nextWave = true;
                 waveNumber++;
@@ -69,6 +72,7 @@ public class WaveManager : MonoBehaviour
             } else
             {
                 doorlight.SetActive(true);
+                door.SetActive(true);
             }
   
         }
