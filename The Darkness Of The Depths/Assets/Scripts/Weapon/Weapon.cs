@@ -41,13 +41,28 @@ public class Weapon : MonoBehaviour
 
     public RangedWeaponStats weapon;
 
+    public int whatWeapon;
 
     public PlayerHealth health;
+    public SniperSounds sniper;
+    public ShotgunSounds shotgun;
+    public AutoSounds auto;
+    public SemiSounds semi;
+    public PistolSounds pistol;
 
+    public AudioClip[] Shooting;
+    public AudioClip[] Empty;
+    public AudioClip[] Reloading;
+    public AudioClip[] DoneReload;
+
+
+    private AudioSource audioCenter;
 
 
     private void Start()
     {
+        
+       
         health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         damage = weapon.dmg;
         firepoint = RfirePoint;
@@ -61,6 +76,46 @@ public class Weapon : MonoBehaviour
         force = weapon.knockBackForce;
         autoShooting = weapon.autoShooting;
         weaponsprite = weapon.weaponSprite;
+
+        audioCenter = GameObject.Find("AudioCenter").GetComponent<AudioSource>();
+        Debug.Log(audioCenter);
+
+        switch (whatWeapon)
+        {
+            case 0:
+                Shooting = AudioManager.pShot;
+                Empty = AudioManager.pEmpty;
+                Reloading = AudioManager.pReload;
+                DoneReload = AudioManager.pDoneReload;
+                return;
+            case 1:
+                Shooting = AudioManager.sShot;
+                Empty = AudioManager.sEmpty;
+                Reloading = AudioManager.sReload;
+                DoneReload = AudioManager.sDoneReload;
+                return;
+            case 2:
+                Shooting = AudioManager.aShot;
+                Empty = AudioManager.aEmpty;
+                Reloading = AudioManager.aReload;
+                DoneReload = AudioManager.aDoneReload;
+                return;
+            case 3:
+                Shooting = AudioManager.ssShot;
+                Empty = AudioManager.ssEmpty;
+                Reloading = AudioManager.ssReload;
+                return;       
+            case 4:
+                Shooting = AudioManager.sssShot;
+                Empty = AudioManager.sssEmpty;
+                Reloading = AudioManager.sssReload;
+                return;
+        }
+
+
+
+
+
     }
 
     private void OnEnable()
@@ -96,6 +151,12 @@ public class Weapon : MonoBehaviour
         angle = Mathf.Atan2(dir.y, dir.x);
         transform.rotation = quaternion.Euler(0, 0, angle);
 
+        if(reloading && Input.GetMouseButtonDown(0))
+        {
+            audioCenter.PlayOneShot(Empty[UnityEngine.Random.Range(0, Empty.Length)]);
+            audioCenter.volume = 0.1f;
+        }
+
         if (reloading)
             return;
 
@@ -119,8 +180,6 @@ public class Weapon : MonoBehaviour
             {
                 nextTimeToFire = Time.time + 1 / AS;
                 Shoot();
-
-
             }
         }
         else
@@ -137,6 +196,8 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        audioCenter.PlayOneShot(Shooting[UnityEngine.Random.Range(0, Shooting.Length)]);
+        audioCenter.volume = 0.1f;
         for (int i = 0; i < numberOfShots; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, firepoint.position, transform.rotation);
@@ -160,13 +221,19 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
+        ammo = 0;
+        audioCenter.PlayOneShot(Reloading[UnityEngine.Random.Range(0, Reloading.Length)]);
+        audioCenter.volume = 0.1f;
+        
         health.TakeDamage(weapon.lifeSteal);
         reloading = true;
         yield return new WaitForSeconds(reloadSpeed);
-
+        audioCenter.PlayOneShot(DoneReload[UnityEngine.Random.Range(0, DoneReload.Length)]);
         ammo = maxAmmo;
         reloading = false;
-
-
     }
+}
+
+public class PistolSound
+{
 }

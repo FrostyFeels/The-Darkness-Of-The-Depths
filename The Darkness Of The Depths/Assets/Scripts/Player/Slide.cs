@@ -6,7 +6,7 @@ using UnityEngine;
 public class Slide : MonoBehaviour
 {
     private Rigidbody2D rb;
-
+    public Transform body;
     public BoxCollider2D normalCollider;
 
     public float slideSpeed;
@@ -34,22 +34,22 @@ public class Slide : MonoBehaviour
 
         if (StaticManager.slide)
         {
-            if (player.IsGrounded() && Input.GetKeyDown(KeyCode.S) && !isSliding)
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.S) && !isSliding)
             {
+                Debug.Log("Runs");
                 isSliding = true;
-                transform.Rotate(0f, 0f, rotation * mv.movement.x);
+                body.transform.rotation = quaternion.Euler(0f, 0f, rotation * -mv.movement.x);
                 jump.enabled = false;
                 mv.enabled = false;
 
             }
 
-            if (timer > wait && !HeadFree())
+            if (timer > wait)
             {
-                transform.Rotate(0f, 0f, 0f);
+                body.transform.rotation = quaternion.Euler(0f, 0f, 0f);
                 isSliding = false;
                 jump.enabled = true;
                 mv.enabled = true;
-
                 timer = 0f;
             }
         }
@@ -72,10 +72,25 @@ public class Slide : MonoBehaviour
                 }
             }
         }
+
+        if(timer > wait)
+        {
+            body.transform.rotation = quaternion.Euler(0f, 0f, 0f);
+            isSliding = false;
+            jump.enabled = true;
+            mv.enabled = true;
+            timer = 0f;
+        }
     }
     public bool HeadFree()
     {
         RaycastHit2D raycasthit2d = Physics2D.BoxCast(normalCollider.bounds.center, normalCollider.bounds.size, 0f, Vector2.up, .1f, platfromLayerMask);
+        return raycasthit2d.collider != null;
+    }
+
+    public bool IsGrounded()
+    {
+        RaycastHit2D raycasthit2d = Physics2D.BoxCast(normalCollider.bounds.center, normalCollider.bounds.size, 0f, Vector2.down, .1f, platfromLayerMask);
         return raycasthit2d.collider != null;
     }
 

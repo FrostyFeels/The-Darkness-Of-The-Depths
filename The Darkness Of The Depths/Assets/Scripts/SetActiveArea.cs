@@ -10,9 +10,7 @@ public class SetActiveArea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            StaticManager.SetArea(areaName);
-           
-            
+            StaticManager.SetArea(areaName);           
         }
     }
 }

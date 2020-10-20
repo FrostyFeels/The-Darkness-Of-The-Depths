@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 836517723925776755}
   m_Layer: 12
   m_Name: Eyes (3)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -902512243
-  m_SortingLayer: 4
+  m_SortingLayer: 9
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: c86fef703405b8c419dd4ed2585804a4, type: 3}
   m_Color: {r: 1, g: 0.553443, b: 0, a: 1}
@@ -92,9 +92,9 @@ GameObject:
   m_Component:
   - component: {fileID: 192342699184856233}
   - component: {fileID: 1857051139614882942}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Point Light 2D (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,9 +164,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3551381237713806071}
   - component: {fileID: 4436401065142498147}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Point Light 2D (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,9 +235,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2897541307159310756}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Firepoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 2897541307324956890}
   - component: {fileID: 2897541307324956892}
   - component: {fileID: 2897541307324956895}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SemiAutoEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -290,6 +290,7 @@ Transform:
   - {fileID: 2897541308974809541}
   - {fileID: 2897541309016059428}
   - {fileID: 6601251132123094696}
+  - {fileID: 5701577554762234782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -307,8 +308,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ranged: 1
   melee: 0
+  sniper: 0
+  tank: 0
   movement: {fileID: 0}
-  rangedAttack: {fileID: 0}
+  rangedAttack: {fileID: 2897541308974809537}
   meleeAttack: {fileID: 0}
   ai: 0
 --- !u!114 &2897541307324956890
@@ -332,10 +335,20 @@ MonoBehaviour:
   speed: 6
   direction: 0
   distance: 0
+  vectorDistance: {x: 0, y: 0, z: 0}
+  attackRange: 0
   range: 35
   sprite: {fileID: 2897541309016059431}
   rangedStats: {fileID: 0}
   meleeStats: {fileID: 0}
+  groundCheck: {fileID: 5701577554762234782}
+  movingRight: 0
+  enemyLayermask:
+    serializedVersion: 2
+    m_Bits: 768
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1792
 --- !u!50 &2897541307324956892
 Rigidbody2D:
   serializedVersion: 4
@@ -389,7 +402,7 @@ GameObject:
   - component: {fileID: 2897541308974809538}
   - component: {fileID: 2897541308974809537}
   - component: {fileID: 2897541308974809543}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -449,8 +462,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -902512243
-  m_SortingLayer: 4
-  m_SortingOrder: 5
+  m_SortingLayer: 9
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: c86fef703405b8c419dd4ed2585804a4, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -475,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: {x: 0, y: 0}
+  setDirection: {x: 0, y: 0}
   player: {fileID: 0}
   firepoint: {fileID: 2897541307159310756}
   gun: {fileID: 2897541309016059428}
@@ -491,10 +505,18 @@ MonoBehaviour:
   NumberOfShots: 0
   ammo: 0
   range: 0
+  shieldDamage: 0
   waitingToFireTime: 0
   enemyName: Semi-AutoEnemy
   ai: {fileID: 2897541307324956893}
   sprite: {fileID: 2897541309016059431}
+  aimLine: {fileID: 0}
+  shootLine: {fileID: 0}
+  aiming: 0
+  shooting: 0
+  enemymask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &2897541308974809543
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -532,9 +554,9 @@ GameObject:
   - component: {fileID: 2897541309016059428}
   - component: {fileID: 2897541309016059431}
   - component: {fileID: 2897541309016059430}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -551,6 +573,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2897541307159310756}
+  - {fileID: 2509073940414731584}
   m_Father: {fileID: 2897541307324956891}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -591,9 +614,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1117023135
-  m_SortingLayer: 3
-  m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: ffc310e77f3178b47b8437f9b2c81b76, type: 3}
+  m_SortingLayer: 10
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: d2cc8676fe0f16b41959c824a16b8dad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -701,6 +724,36 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &3044300136102466663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5701577554762234782}
+  m_Layer: 12
+  m_Name: GroundCheck
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5701577554762234782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044300136102466663}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2897541307324956891}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5572090361491522057
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,9 +764,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6601251132123094696}
   - component: {fileID: 7943185538507742765}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Point Light 2D
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -785,7 +838,7 @@ GameObject:
   - component: {fileID: 3612018295000899044}
   m_Layer: 12
   m_Name: Eyes (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -842,7 +895,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -902512243
-  m_SortingLayer: 4
+  m_SortingLayer: 9
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: c86fef703405b8c419dd4ed2585804a4, type: 3}
   m_Color: {r: 1, g: 0.553443, b: 0, a: 1}
@@ -855,3 +908,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &3599307305688808948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2897541309016059428}
+    m_Modifications:
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378466078041090229, guid: 5293e0a5e691d544384e2fb46a343038,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light 2D
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5293e0a5e691d544384e2fb46a343038, type: 3}
+--- !u!4 &2509073940414731584 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1378466078041090228, guid: 5293e0a5e691d544384e2fb46a343038,
+    type: 3}
+  m_PrefabInstance: {fileID: 3599307305688808948}
+  m_PrefabAsset: {fileID: 0}

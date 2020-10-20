@@ -31,7 +31,7 @@ public class MeleeAttack : MonoBehaviour
         Timer = 0;
         Sword.transform.position = ai.movement.spawnPoint.position;
         yield return new WaitForSeconds(1f);
-        ai.ai = EnemyAI.Ai.Running;
+        ai.ai = EnemyAI.Ai.searching;
     }
 
     private void FixedUpdate()
@@ -43,11 +43,11 @@ public class MeleeAttack : MonoBehaviour
                 Timer += Time.fixedDeltaTime;
                 if (ai.movement.direction < 0)
                 {
-                    Sword.transform.position += new Vector3(0.5f, 0f, 0f);           
+                    Sword.transform.position -= new Vector3(0.5f, 0f, 0f);           
                 }
                 if (ai.movement.direction > 0)
                 {
-                    Sword.transform.position += new Vector3(-0.5f, 0f, 0f);
+                    Sword.transform.position -= new Vector3(-0.5f, 0f, 0f);
                 }
             }
             else

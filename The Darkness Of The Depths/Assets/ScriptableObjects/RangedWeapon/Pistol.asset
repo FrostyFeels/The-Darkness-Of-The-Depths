@@ -19,7 +19,7 @@ MonoBehaviour:
   ArmorPenentration: 1
   range: 30
   fireRate: 10
-  reloadSpeed: 1
+  reloadSpeed: 3
   minSpread: 0
   maxSpread: 0
   piercingReduction: 1

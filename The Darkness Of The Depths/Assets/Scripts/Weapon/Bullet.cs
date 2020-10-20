@@ -29,6 +29,13 @@ public class Bullet : MonoBehaviour
                 health.TakeDamage(dmg, dir, force);
                 Destroy(gameObject);
             }
+            if(hit.collider.CompareTag("Shield"))
+            {
+                MeleeWeapon shield = hit.collider.gameObject.GetComponent<MeleeWeapon>();
+                shield.takeDamage(dmg);
+                Destroy(gameObject);
+            }
+
             if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor"))
             {
                 Destroy(gameObject);
@@ -44,6 +51,13 @@ public class Bullet : MonoBehaviour
             EnemyHealth health = collision.gameObject.GetComponentInParent<EnemyHealth>();
             health.TakeDamage(dmg, dir, force);
             Destroy(gameObject);
+        }
+        if(collision.CompareTag("Shield"))
+        {
+            MeleeWeapon shield = collision.gameObject.GetComponent<MeleeWeapon>();
+            shield.takeDamage(dmg);
+            Destroy(gameObject);
+
         }
         if (collision.CompareTag("Wall") || collision.CompareTag("Floor"))
         {

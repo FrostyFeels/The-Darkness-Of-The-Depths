@@ -5,10 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MapBuild.unity
+  - enabled: 0
+    path: Assets/Scenes/Old map/Tutorial.unity
+    guid: 76b7cd091a97ff844b8fc3971d4a7808
+  - enabled: 0
+    path: Assets/Scenes/Old map/MapBuild.unity
     guid: 062df3f5b2488334f8430ff53eb0f308
-  - enabled: 1
-    path: Assets/Scenes/Shop.unity
+  - enabled: 0
+    path: Assets/Scenes/Old map/Shop.unity
     guid: e81c5460dad130c4e8fb7a1a373c9eb3
+  - enabled: 1
+    path: Assets/Scenes/New Map/Level 1.unity
+    guid: 14581a9d9ccd0a5448be13aa38f50149
+  - enabled: 1
+    path: Assets/Scenes/New Map/Level 2.unity
+    guid: 79025e7a6a4a98e499a17a7828d7bf35
+  - enabled: 1
+    path: Assets/Scenes/New Map/Level 3.unity
+    guid: 40eb3abef08c53a43885957c0f520fec
+  - enabled: 1
+    path: Assets/Scenes/New Map/Level 4.unity
+    guid: cc66c60a20f850e48851965c64868173
   m_configObjects: {}

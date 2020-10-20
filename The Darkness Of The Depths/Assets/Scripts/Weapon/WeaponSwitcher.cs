@@ -62,7 +62,10 @@ public class WeaponSwitcher : MonoBehaviour
                 if (StaticManager.CheckWeaponUnlock(weaponName))
                 {
                     aweapon.gameObject.SetActive(true);
+
                     UI.weapon = aweapon.gameObject.GetComponent<Weapon>();
+                   
+                    
                 } 
                 else
                 {   

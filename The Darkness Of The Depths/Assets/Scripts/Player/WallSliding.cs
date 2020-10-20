@@ -15,6 +15,7 @@ public class WallSliding : MonoBehaviour
     public bool jumped = false;
     bool walljump = false;
     [SerializeField] private LayerMask platfromLayerMask;
+    [SerializeField] private LayerMask grounded;
     private void Start()
     {
         bc = GetComponentInChildren<BoxCollider2D>();
@@ -24,9 +25,10 @@ public class WallSliding : MonoBehaviour
     void Update()
     {
 
-        if(againstWall())
+        if(againstWall() || IsGrounded() && walljump)
         {     
-                rb.sharedMaterial = slippery;                       
+                rb.sharedMaterial = slippery;
+                rb.velocity = new Vector2(rb.velocity.x, -5f);
         } else
         {
             rb.sharedMaterial = new PhysicsMaterial2D("Normal");
@@ -78,5 +80,19 @@ public class WallSliding : MonoBehaviour
         }
 
 
+    }
+
+    public bool IsGrounded()
+    {
+        if (movement.movement.x > 0)
+        {
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.right, .05f, grounded);
+            return raycasthit2d.collider != null;
+        }
+        else
+        {
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.left, .05f, grounded);
+            return raycasthit2d.collider != null;
+        }
     }
 }

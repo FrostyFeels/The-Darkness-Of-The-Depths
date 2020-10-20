@@ -6,15 +6,20 @@ public class EnemyAI : MonoBehaviour
 {
     public bool ranged;
     public bool melee;
+    public bool sniper;
+    public bool tank;
+    public bool fixWeapon;
     public EnemyMovement movement;
     public RangedAttack rangedAttack;
     public MeleeAttack meleeAttack;
+    public GameObject lights; 
     
     
 
     public enum Ai
     { 
-        Running,
+        searching,
+        chasing,
         Attacking,       
         Reloading,
         aiming,
@@ -27,7 +32,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         movement = GetComponent<EnemyMovement>();
-        ai = Ai.Running;
+        ai = Ai.searching;
     }
 
     // Update is called once per frame
@@ -35,23 +40,40 @@ public class EnemyAI : MonoBehaviour
     {
         switch(ai)
         {
-            case Ai.Running:
+            case Ai.searching:
                 movement.speed = movement.averagespeed;
                 movement.enabled = true;
+
                 if(ranged)
                 {
+                    if(!fixWeapon)
+                    {
+                        rangedAttack.resetWeapon();
+                        fixWeapon = true;
+                    }
+
                     rangedAttack.enabled = false;
+
                 }
-                if(melee)
+                if (melee)
                 {
                     meleeAttack.enabled = false;
                 }
+
+                return;
+            case Ai.chasing:
+                if(ranged)
+                {
+                    movement.speed = 0;
+                }
                 return;
             case Ai.aiming:
-                rangedAttack.enabled = true;                          
-                movement.speed = movement.averagespeed / 2;               
+                rangedAttack.enabled = true;
+                movement.speed = 0;
+                fixWeapon = false;
                 return;
             case Ai.Attacking:
+
                 if(melee)
                 {
                     meleeAttack.enabled = true;
@@ -59,13 +81,22 @@ public class EnemyAI : MonoBehaviour
                 }
                 movement.speed = 0;
                 return;
+
             case Ai.Reloading:
-                movement.speed = movement.averagespeed / 2;
+                if(ranged)
+                {
+                    movement.speed = 0;
+                }
+                if(melee)
+                {
+                    movement.speed = movement.averagespeed / 2;
+                }   
                 return;
-            case Ai.TakingDamage:                
+
+            case Ai.TakingDamage:
                 return;
-            case Ai.Dead:
-               
+
+            case Ai.Dead:               
                 Destroy(gameObject);
                 return;
         }

@@ -20,19 +20,19 @@ public class SpawnArea : MonoBehaviour
             foreach (Transform aSpawnSpot in transform)
             {
                 
-                if(spawn.SpawnLocations.Contains(aSpawnSpot) != aSpawnSpot.transform)
+   /*             if(spawn.SpawnLocations.Contains(aSpawnSpot) != aSpawnSpot.transform)
                 {
                     spawn.SpawnLocations.Add(aSpawnSpot);
-                }
+                }*/
                 
             }
         }
         else
         {
-            foreach (Transform aSpawnSpot in transform)
+/*            foreach (Transform aSpawnSpot in transform)
             {
                 spawn.SpawnLocations.Remove(aSpawnSpot);
-            }
+            }*/
         }
 
     }

@@ -11,7 +11,7 @@ public class GrappleShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grapple = GameObject.FindGameObjectWithTag("Player").GetComponent<Grappeling>();
+        grapple = GameObject.Find("SpiderPlayer").GetComponent<Grappeling>();
     }
 
     void Update()
@@ -19,12 +19,24 @@ public class GrappleShot : MonoBehaviour
         transform.Translate(Vector3.right * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
+        Debug.Log(collision.tag);
+        Debug.Log(collision.gameObject);
+        Debug.Log(grapple);
+
+
+        if (collision.CompareTag("Floor"))
         {
             grapple.TargetHit(collision.gameObject, transform.position);
             Destroy(gameObject);
         }
+
+        if (collision.CompareTag("Wall"))
+        {
+            grapple.TargetHit(collision.gameObject, transform.position);
+            Destroy(gameObject);
+        }
+
     }
 }

@@ -109,7 +109,7 @@ public class Jump : MonoBehaviour
         {
             chargeTime = 0;
             isChargeJumping = false;
-            rb.velocity = new Vector2(rb.velocity.x, jumpforce * 2);
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce * 3);
         }
     }
 

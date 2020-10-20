@@ -25,28 +25,44 @@ public class Movement : MonoBehaviour
 
     Slide slide;
     Grappeling grapple;
-    //Blocking block;
+    Blocking block;
     public float rotation;
-   
-    
+    public List<Transform> startLocation = new List<Transform>();
+    public int startNumber;
+
+    public AudioClip[] moving;
+    private AudioSource audioCenter;
+
+
+
 
     bool isMoving = false;
+    float walktimer;
+    private float walkreset = .35f;
 
-    
+
 
 
     void Start()
     {
-        //block = GetComponent<Blocking>();
+        block = GetComponent<Blocking>();
         accelPerSec = maxSpeed / timeToReachMaxSpeed;
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc = gameObject.GetComponentInChildren<BoxCollider2D>();
         slide = GetComponentInChildren<Slide>();
         grapple = GetComponentInChildren<Grappeling>();
+
+        startNumber = StaticManager.lastLevel;
+        transform.position = startLocation[startNumber].transform.position;
+        audioCenter = GameObject.Find("AudioCenter").GetComponent<AudioSource>();
+
+        moving = AudioManager.movement;
     }
 
     void Update()
     {
+        
+
         if (slide.isSliding || grapple.grappling)
             return;
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f); // send direction of player
@@ -56,6 +72,12 @@ public class Movement : MonoBehaviour
                 isMoving = true;
                 moveSpeed += accelPerSec * Time.deltaTime;
                 moveSpeed = math.min(moveSpeed, maxSpeed);
+                if(Time.time >= walktimer)
+                {
+                    walktimer = Time.time + walkreset;                  
+                    audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
+                }
+                
             }
             else if (movement.x < 0)
 
@@ -63,7 +85,12 @@ public class Movement : MonoBehaviour
                 isMoving = true;
                 moveSpeed -= accelPerSec * Time.deltaTime;
                 moveSpeed = math.max(moveSpeed, -maxSpeed);
-            }
+                if (Time.time >= walktimer)
+                {
+                    walktimer = Time.time + walkreset;
+                    audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
+                }
+        }
             else
             {
                 isMoving = false;
@@ -72,16 +99,17 @@ public class Movement : MonoBehaviour
         
 
 
-        if (Input.GetAxis("Horizontal") > 0 && !facingRight)
+        if (Input.GetAxis("Horizontal") > 0 && facingRight)
         {
-            Flip();
-            //block.blockLocation = block.leftBlock;
+            Flip();           
+            block.blockLocation = block.rightBlock.transform;
+       
         }
-        if (Input.GetAxis("Horizontal") < 0 && facingRight)
-        {
-            
+        if (Input.GetAxis("Horizontal") < 0 && !facingRight)
+        {          
             Flip();
-            //block.blockLocation = block.rightBlock;
+            block.blockLocation = block.leftBlock;
+           
         }
 
     }

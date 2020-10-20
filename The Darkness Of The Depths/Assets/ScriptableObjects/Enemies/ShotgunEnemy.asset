@@ -19,6 +19,7 @@ MonoBehaviour:
   movementSpeed: 6.5
   Size: 1
   armor: 5
+  shieldDamage: 0.25
   weaponSprite: {fileID: 21300000, guid: ccf1ca810fc95aa44b2acafbda2d77d1, type: 3}
   AttackSpeed: 0.75
   reloadSpeed: 3

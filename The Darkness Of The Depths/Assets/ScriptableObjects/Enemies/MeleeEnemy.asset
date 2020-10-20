@@ -16,8 +16,10 @@ MonoBehaviour:
   HP: 150
   damage: 15
   attackRange: 8
+  range: 35
   movementSpeed: 8
   Size: 1
   armor: 5
+  shieldDamage: 1
   weaponSprite: {fileID: 0}
   swingSpeed: 3

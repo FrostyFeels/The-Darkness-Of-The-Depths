@@ -90,9 +90,7 @@ public class EnemyHealth : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 GameObject health = Instantiate(healthPrefab, transform.position + new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0f), Quaternion.identity);
-                Debug.Log(i);
             }
-            manager.kill++; 
             Destroy(gameObject);
         }
     }

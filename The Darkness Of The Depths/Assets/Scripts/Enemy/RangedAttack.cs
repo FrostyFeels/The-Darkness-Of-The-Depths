@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
-    public Vector2 dir;
+    public Vector2 dir, setDirection;
     public Transform player;
     public Transform firepoint;
     public Transform gun;
@@ -20,12 +20,19 @@ public class RangedAttack : MonoBehaviour
     public int NumberOfShots;
     public int ammo;
     public int range;
+    public float shieldDamage;
     public float waitingToFireTime;
     public string enemyName;
 
     private EnemyRangedStatsManager weapon;
     public EnemyAI ai;
     public SpriteRenderer sprite;
+
+    public LineRenderer aimLine;
+    public LineRenderer shootLine;
+
+    public bool aiming, shooting;
+    [SerializeField] private LayerMask enemymask;
 
 
     public void Start()
@@ -42,14 +49,22 @@ public class RangedAttack : MonoBehaviour
         NumberOfShots = weapon.stats.NumberOfShots;
         ammo = weapon.stats.ammo;
         range = weapon.stats.range;
-        
+        shieldDamage = weapon.stats.shieldDamage;
     }
 
     void Update()
     {
+        Debug.DrawRay(firepoint.position, dir, Color.red, 2f);
+        
+
+        
         dir = (player.position - firepoint.position).normalized;
         angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+       
+        
+        
+
 
         if (ai.ai == EnemyAI.Ai.Reloading)
             return;
@@ -66,15 +81,71 @@ public class RangedAttack : MonoBehaviour
             StartCoroutine(Aiming());
         }
 
+        if(aiming)
+        {
+            aimLine.enabled = true;
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, dir, Mathf.Infinity, enemymask);
+            if(ray.collider != null)
+            {
+                aimLine.SetPosition(0, firepoint.position);
+                aimLine.SetPosition(1, ray.point);              
+            }
+        }          
+        if(shooting)
+        {
+            shootLine.enabled = true;
+            Debug.DrawRay(transform.position, setDirection, Color.black, 10f);
 
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, setDirection, Mathf.Infinity, enemymask);
+            if (ray.collider != null)
+            {
+                shootLine.SetPosition(0, firepoint.position);
+                shootLine.SetPosition(1, ray.point);                                       
+            }
+        }       
+
+
+    }
+
+    public void resetWeapon()
+    {
+        dir = Vector2.zero;
+        angle = 0;
+        gun.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     IEnumerator Aiming()
     {
+        if(ai.sniper)
+        {
+            aiming = true;
+        }
+        yield return new WaitForSeconds(waitingToFireTime);    
+       
+        if(ai.sniper)
+        {
+            ai.ai = EnemyAI.Ai.Attacking;
+            setDirection = dir;
+            Debug.Log("Courotine direction: " + setDirection);
+            shooting = true;
+            aiming = false;
+            aimLine.enabled = false;
+            
+            Debug.Log(shooting);
+            
+            Debug.DrawRay(firepoint.position, setDirection * 20, Color.black, 10f);
+            yield return new WaitForSeconds(waitingToFireTime);
+            shooting = false;
+            shootLine.enabled = false;
 
-        yield return new WaitForSeconds(waitingToFireTime);       
-        ai.ai = EnemyAI.Ai.Attacking;
-        Shoot();       
+            Shoot();
+        }
+        else
+        {
+            ai.ai = EnemyAI.Ai.Attacking;
+            Shoot();
+        }
+             
     }
 
 
@@ -89,10 +160,11 @@ public class RangedAttack : MonoBehaviour
             stats.dmg = damage;
             stats.startLocation = firepoint.position;
             stats.range = range;
+            stats.shieldDamage = shieldDamage;
         }
         ammo--; 
 
-        ai.ai = EnemyAI.Ai.Running;
+        ai.ai = EnemyAI.Ai.searching;
     }
 
     IEnumerator Reloading()
@@ -100,7 +172,7 @@ public class RangedAttack : MonoBehaviour
         
         yield return new WaitForSeconds(reloadingTIme);
         ammo = weapon.stats.ammo;
-        ai.ai = EnemyAI.Ai.Running;
+        ai.ai = EnemyAI.Ai.searching;
     }
 
 

@@ -16,6 +16,7 @@ TagManager:
   - Melee
   - Tank
   - Cursor
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -39,8 +40,8 @@ TagManager:
   - boostJumpArea
   - grappleHookArea
   - wallJumpArea
-  - 
-  - 
+  - Shield
+  - EnemyBullet
   - 
   - 
   - 
@@ -56,17 +57,32 @@ TagManager:
   - name: BackGround
     uniqueID: 1089050893
     locked: 0
+  - name: Lights
+    uniqueID: 2140360501
+    locked: 0
+  - name: DubbleJumpArea
+    uniqueID: 318558931
+    locked: 0
+  - name: GrappleArea
+    uniqueID: 3487747691
+    locked: 0
+  - name: BoostArea
+    uniqueID: 2586670709
+    locked: 0
+  - name: SpawnArea
+    uniqueID: 1807736127
+    locked: 0
   - name: Door
     uniqueID: 984388261
     locked: 0
   - name: Player
     uniqueID: 597243613
     locked: 0
-  - name: Weapons
-    uniqueID: 3177944161
-    locked: 0
   - name: Enemies
     uniqueID: 3392455053
+    locked: 0
+  - name: Weapons
+    uniqueID: 3177944161
     locked: 0
   - name: Bullets
     uniqueID: 2164467835

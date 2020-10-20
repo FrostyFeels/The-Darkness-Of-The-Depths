@@ -53,8 +53,7 @@ public class Grappeling : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && grappling)
-        {
-            //playerRB.velocity = new Vector2(playerRB.velocity.x, jumpforce);
+        {          
             grappling = false;
         }
 

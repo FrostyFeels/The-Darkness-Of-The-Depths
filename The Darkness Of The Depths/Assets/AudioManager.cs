@@ -1,21 +1,33 @@
 ﻿using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+
+public static class AudioManager
 {
+    public static AudioClip[] pShot;
+    public static AudioClip[] pReload;
+    public static AudioClip[] pDoneReload;
+    public static AudioClip[] pEmpty;
 
+    public static AudioClip[] aShot;
+    public static AudioClip[] aReload;
+    public static AudioClip[] aDoneReload;
+    public static AudioClip[] aEmpty;
 
-    public Sound[] SoundGroup;
-    public Sound[] sounds;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static AudioClip[] sShot;
+    public static AudioClip[] sReload;
+    public static AudioClip[] sDoneReload;
+    public static AudioClip[] sEmpty;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static AudioClip[] ssShot;
+    public static AudioClip[] ssReload;
+    public static AudioClip[] ssEmpty;
+
+    public static AudioClip[] sssShot;
+    public static AudioClip[] sssReload;
+    public static AudioClip[] sssEmpty;
+
+    public static AudioClip[] movement;
 }

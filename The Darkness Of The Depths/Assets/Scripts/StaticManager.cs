@@ -4,11 +4,12 @@ using UnityEngine;
 
 public static class StaticManager
 {
-    public static bool doubleJump, wallJump, powerJump, grappleHook, slide;
+    public static bool doubleJump = true, wallJump, powerJump, grappleHook = true, slide;
     public static bool shotgun, autoRifle, semiAutoRifle, sniper;
     public static GameObject spawnArea, doubleJumpArea, boostJumpArea, grappleHookArea, wallJumpArea;
     public static GameObject activeArea, secondArea;
     public static bool newArea = false;
+    public static int lastLevel;
     public static int unlocksLeft = 2;
     public static bool pistol = true;
     public static bool HasBoughAWeapon = false;
