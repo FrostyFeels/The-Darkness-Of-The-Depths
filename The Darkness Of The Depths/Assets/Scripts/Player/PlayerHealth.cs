@@ -15,12 +15,14 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         maxHealth = health;
+        health = StaticManager.playerHealth;
         playermovent = gameObject.GetComponent<Movement>();  
     }
 
     public void TakeDamage(int damage)
     {
         health -= (damage - armor);
+        StaticManager.playerHealth = health;
     }
 
     public void GetHP(int healthAmount)
@@ -28,10 +30,12 @@ public class PlayerHealth : MonoBehaviour
         if(health + healthAmount <= maxHealth)
         {
             health += healthAmount;
+            StaticManager.playerHealth = health;
         }
         else
         {
             health = maxHealth;
+            StaticManager.playerHealth = health;
         }
         
     }

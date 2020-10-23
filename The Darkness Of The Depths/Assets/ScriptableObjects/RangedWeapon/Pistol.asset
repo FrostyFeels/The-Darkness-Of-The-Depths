@@ -29,3 +29,4 @@ MonoBehaviour:
   NumberOfShots: 1
   autoShooting: 0
   lifeSteal: 0
+  shieldDmg: 1

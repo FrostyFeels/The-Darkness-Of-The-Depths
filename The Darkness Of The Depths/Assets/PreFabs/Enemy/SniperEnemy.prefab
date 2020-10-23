@@ -49,7 +49,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,8 +93,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 1, b: 0.9641509, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 1, a: 1}
+      key1: {r: 0, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -867,7 +867,7 @@ MonoBehaviour:
   ammo: 0
   range: 0
   shieldDamage: 0
-  waitingToFireTime: 5
+  waitingToFireTime: 1
   enemyName: Sniper
   ai: {fileID: 7276992101551092205}
   sprite: {fileID: 7276992100951564055}
@@ -875,9 +875,13 @@ MonoBehaviour:
   shootLine: {fileID: 7009100510275329374}
   aiming: 0
   shooting: 0
+  realshooting: 0
   enemymask:
     serializedVersion: 2
     m_Bits: 1792
+  colorAddition: 0.5
+  color: {r: 0, g: 1, b: 1, a: 1}
+  spawncolor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &7276992100977111287
 BoxCollider2D:
   m_ObjectHideFlags: 0

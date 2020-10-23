@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Tank
   HP: 300
-  damage: 15
+  damage: 30
   attackRange: 8
   range: 35
   movementSpeed: 3

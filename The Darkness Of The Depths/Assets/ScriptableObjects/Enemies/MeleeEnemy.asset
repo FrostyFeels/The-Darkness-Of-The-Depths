@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: MeleeEnemy
   HP: 150
-  damage: 15
+  damage: 35
   attackRange: 8
   range: 35
   movementSpeed: 8

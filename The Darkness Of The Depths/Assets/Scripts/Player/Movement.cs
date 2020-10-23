@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -12,7 +12,8 @@ public class Movement : MonoBehaviour
     private BoxCollider2D bc;
     public Transform body;
     [SerializeField] private LayerMask platfromLayerMask;
-    private bool facingRight = true;
+    [SerializeField] private LayerMask EnemyLayerMask;
+    public bool facingRight = true;
     public Vector3 movement;
 
     public float sprintMultiplayer = 1.5f;
@@ -34,17 +35,28 @@ public class Movement : MonoBehaviour
     private AudioSource audioCenter;
 
 
-
+    public bool firstspawn;
 
     bool isMoving = false;
     float walktimer;
     private float walkreset = .35f;
+
+    public float yeetTimer;
+    public float maxEnemyStandTime;
+
+    public bool flying;
+    public float flyTimer;
+    public float maxFlyTime;
+
+    private PlayerHealth health;
 
 
 
 
     void Start()
     {
+        audioCenter = GameObject.Find("AudioCenter").GetComponent<AudioSource>();
+        health = GameObject.Find("SpiderPlayer").GetComponent<PlayerHealth>();
         block = GetComponent<Blocking>();
         accelPerSec = maxSpeed / timeToReachMaxSpeed;
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -53,44 +65,85 @@ public class Movement : MonoBehaviour
         grapple = GetComponentInChildren<Grappeling>();
 
         startNumber = StaticManager.lastLevel;
-        transform.position = startLocation[startNumber].transform.position;
-        audioCenter = GameObject.Find("AudioCenter").GetComponent<AudioSource>();
+        if(StaticManager.firstspawn)
+        {
+           transform.position = startLocation[startNumber].transform.position;         
+        }
 
-        moving = AudioManager.movement;
+        StaticManager.firstspawn = true;
+       
     }
 
     void Update()
     {
+        if (OnEnemy())
+        {
+            yeetTimer += Time.deltaTime;
+            if (yeetTimer >= maxEnemyStandTime)
+            {
+                flying = true;
+                rb.AddForce(new Vector2(200f, 75f), ForceMode2D.Impulse);
+                health.TakeDamage(30);
+            }
+        }
+        else
+        {
+            yeetTimer = 0;
+        }
+        if (flying)
+        {
+            flyTimer += Time.deltaTime;
+            if (flyTimer >= maxFlyTime)
+            {
+                flying = false;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene("Boss"); 
+        }
+
+        if (slide.isSliding || grapple.grappling || flying)
+            return;
+
         
 
-        if (slide.isSliding || grapple.grappling)
-            return;
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f); // send direction of player
+
+
+ 
       
             if (movement.x > 0)
             {
                 isMoving = true;
                 moveSpeed += accelPerSec * Time.deltaTime;
                 moveSpeed = math.min(moveSpeed, maxSpeed);
-                if(Time.time >= walktimer)
+                if(IsGrounded())
                 {
-                    walktimer = Time.time + walkreset;                  
-                    audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
-                }
-                
+                    if (Time.time >= walktimer)
+                    {
+                        moving = AudioManager.movement;
+                        walktimer = Time.time + walkreset;
+                        audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
+                    }
+                }                      
             }
             else if (movement.x < 0)
-
             {
                 isMoving = true;
                 moveSpeed -= accelPerSec * Time.deltaTime;
                 moveSpeed = math.max(moveSpeed, -maxSpeed);
-                if (Time.time >= walktimer)
+                if (IsGrounded())
                 {
-                    walktimer = Time.time + walkreset;
-                    audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
+                    if (Time.time >= walktimer)
+                    {
+                        moving = AudioManager.movement;
+                        walktimer = Time.time + walkreset;
+                        audioCenter.PlayOneShot(moving[UnityEngine.Random.Range(0, moving.Length)]);
+                    }
                 }
-        }
+            }
             else
             {
                 isMoving = false;
@@ -115,7 +168,7 @@ public class Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (slide.isSliding || grapple.grappling)
+        if (slide.isSliding || grapple.grappling || flying)
             return;
 
         if (isMoving)
@@ -157,6 +210,11 @@ public class Movement : MonoBehaviour
     public bool IsGrounded()
     {
         RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, platfromLayerMask);
+        return raycasthit2d.collider != null;
+    }
+    public bool OnEnemy()
+    {
+        RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, EnemyLayerMask);;
         return raycasthit2d.collider != null;
     }
 

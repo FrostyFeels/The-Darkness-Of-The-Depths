@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SniperEnemy
   m_EditorClassIdentifier: 
   enemyName: Sniper
-  HP: 50
-  damage: 20
+  HP: 65
+  damage: 40
   attackRange: 100
   range: 100
   movementSpeed: 0

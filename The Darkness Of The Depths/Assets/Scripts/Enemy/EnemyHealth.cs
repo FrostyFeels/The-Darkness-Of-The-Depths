@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         ai = gameObject.GetComponent<EnemyAI>();
-        manager = GameObject.Find("SpawnManager").GetComponent<WaveManager>();
+       
         if (ai.ranged)
         {
             rangedStats = GameObject.FindGameObjectWithTag(ai.rangedAttack.enemyName).GetComponent<EnemyRangedStatsManager>();

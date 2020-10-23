@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ProgressGates : MonoBehaviour
 {
     public static int unlockNumber = 0;
-    public GameObject switcher;
+    public GameObject switcher, UI;
     public bool FinalCheckPoint;
+    public TextTutorial text;
+
+    public Tutorial tutorial;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {  
@@ -21,6 +26,8 @@ public class ProgressGates : MonoBehaviour
 
     public void ChangeAbility()
     {
+        text.textnumber++;
+        text.spawnText();
         Debug.Log(unlockNumber);
         switch (unlockNumber)
         {
@@ -30,11 +37,9 @@ public class ProgressGates : MonoBehaviour
                 break;
             case 2:
                 StaticManager.slide = false;
-                //blocking
                 break;
             case 3:
                 StaticManager.wallJump = true;
-                //blocking = false;
                 break;
             case 4:
                 StaticManager.wallJump = false;
@@ -48,15 +53,25 @@ public class ProgressGates : MonoBehaviour
                 StaticManager.grappleHook = false;
                 switcher.SetActive(true);
                 break;
-                
 
         }
 
         if(FinalCheckPoint)
         {
-            SceneManager.LoadScene(1);
+            switcher.SetActive(true);
+            UI.SetActive(true);
+            
+
+            StaticManager.UnlockWeapon("Sniper");
+            StaticManager.UnlockWeapon("Shotgun");
+            StaticManager.UnlockWeapon("AutoRifle");
+            StaticManager.UnlockWeapon("SemiAutoRifle");
+            Debug.Log(StaticManager.shotgun);
+            Debug.Log(StaticManager.sniper);
+            Debug.Log(StaticManager.autoRifle);
+            Debug.Log(StaticManager.semiAutoRifle);
+            tutorial.SpawnEnemy();
         }
-        Debug.Log("Should destroy");
         Destroy(gameObject);
     }
 }

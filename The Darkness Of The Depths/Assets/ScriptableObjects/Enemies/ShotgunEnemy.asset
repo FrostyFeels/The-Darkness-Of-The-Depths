@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ShotgunEnemy
   m_EditorClassIdentifier: 
   enemyName: 
-  HP: 75
-  damage: 6
+  HP: 125
+  damage: 8
   attackRange: 15
+  range: 15
   movementSpeed: 6.5
   Size: 1
   armor: 5
@@ -28,4 +29,3 @@ MonoBehaviour:
   BulletSpeed: 30
   NumberOfShots: 7
   ammo: 6
-  range: 15

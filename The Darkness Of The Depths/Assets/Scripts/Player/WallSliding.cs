@@ -70,12 +70,12 @@ public class WallSliding : MonoBehaviour
     {
         if (movement.movement.x > 0)
         {
-            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.right, .05f, platfromLayerMask);
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.right, .1f, platfromLayerMask);
             return raycasthit2d.collider != null;
         }
         else
         {
-            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.left, .05f, platfromLayerMask);
+            RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.left, .1f, platfromLayerMask);
             return raycasthit2d.collider != null;
         }
 

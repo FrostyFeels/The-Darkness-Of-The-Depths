@@ -269,9 +269,11 @@ MonoBehaviour:
   melee: 1
   sniper: 0
   tank: 1
+  fixWeapon: 0
   movement: {fileID: 0}
   rangedAttack: {fileID: 0}
   meleeAttack: {fileID: 6142238637322691076}
+  lights: {fileID: 0}
   ai: 0
 --- !u!114 &5843564110894281206
 MonoBehaviour:
@@ -747,7 +749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: {fileID: 6142238637322691076}
   meleeStats: {fileID: 0}
-  shieldHp: 5
+  shieldHp: 15
 --- !u!1 &7513567623223824276
 GameObject:
   m_ObjectHideFlags: 0

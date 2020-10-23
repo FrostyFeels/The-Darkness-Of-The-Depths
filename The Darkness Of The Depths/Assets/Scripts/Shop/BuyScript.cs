@@ -5,9 +5,12 @@ using UnityEngine.UI;
 public class BuyScript : MonoBehaviour
 {
     public GameObject text;
+    public Text prizeText;
+    public GameObject prizeobject;
     public string weaponName;
     public string otherWeaponName;
-    public TextLocation canvas; 
+    public TextLocation canvas;
+    public int prize;
 
     public void Start()
     {
@@ -23,15 +26,18 @@ public class BuyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             text.SetActive(true);
+            prizeobject.SetActive(true);
+            prizeText.text = "Prize: " + prize.ToString();
             if(Input.GetKey(KeyCode.X))
             {
-                if(StaticManager.unlocksLeft > 0)
+                if(StaticManager.goldAmount > prize)
                 {
                     Debug.Log(weaponName);
                     StaticManager.UnlockWeapon(weaponName);
-                    StaticManager.unlocksLeft--;
+                    StaticManager.goldAmount--;
                     canvas.SpawnText(weaponName);
                     text.SetActive(false);
+                    prizeobject.SetActive(true);
                     gameObject.SetActive(false);
                 }
             }
@@ -43,6 +49,7 @@ public class BuyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             text.SetActive(false);
+            prizeobject.SetActive(false);
         }
     }
 }

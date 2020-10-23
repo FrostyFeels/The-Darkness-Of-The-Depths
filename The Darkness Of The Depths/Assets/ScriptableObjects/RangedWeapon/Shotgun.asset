@@ -18,7 +18,7 @@ MonoBehaviour:
   knockBackForce: 15
   ArmorPenentration: 1
   range: 15
-  fireRate: 2
+  fireRate: 3
   reloadSpeed: 1
   minSpread: -10
   maxSpread: 10
@@ -29,3 +29,4 @@ MonoBehaviour:
   NumberOfShots: 7
   autoShooting: 0
   lifeSteal: 25
+  shieldDmg: 1

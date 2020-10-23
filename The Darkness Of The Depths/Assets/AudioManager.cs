@@ -21,13 +21,16 @@ public static class AudioManager
     public static AudioClip[] sDoneReload;
     public static AudioClip[] sEmpty;
 
-    public static AudioClip[] ssShot;
-    public static AudioClip[] ssReload;
-    public static AudioClip[] ssEmpty;
+    public static AudioClip[] shShot;
+    public static AudioClip[] shReload;
+    public static AudioClip[] shEmpty;
 
-    public static AudioClip[] sssShot;
-    public static AudioClip[] sssReload;
-    public static AudioClip[] sssEmpty;
+    public static AudioClip[] snShot;
+    public static AudioClip[] snReload;
+    public static AudioClip[] snEmpty;
 
     public static AudioClip[] movement;
+
+    public static AudioClip wallHit;
+    public static AudioClip enemyHit;
 }

@@ -10,9 +10,12 @@ public static class StaticManager
     public static GameObject activeArea, secondArea;
     public static bool newArea = false;
     public static int lastLevel;
+    public static bool firstspawn = false;
+    public static int goldAmount = 1500;
     public static int unlocksLeft = 2;
     public static bool pistol = true;
     public static bool HasBoughAWeapon = false;
+    public static float playerHealth = 150f;
 
     
     public static bool SelectDoorType(string doorName)
@@ -130,6 +133,21 @@ public static class StaticManager
                 return autoRifle;
             case "Pistol":
                 return pistol;
+            case "Slide":
+                return slide;
+       
+            case "DoubleJump":
+                return doubleJump;
+         
+            case "WallJump":
+               return wallJump;
+            
+            case "PowerJump":
+               return powerJump;
+              
+            case "GrappleHook":
+               return grappleHook;
+               
         }
         return false;
     }

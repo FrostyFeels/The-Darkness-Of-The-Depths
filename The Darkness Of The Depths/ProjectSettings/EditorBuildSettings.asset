@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Old map/Tutorial.unity
+    path: Assets/Scenes/New Map/Tutorial.unity
     guid: 76b7cd091a97ff844b8fc3971d4a7808
   - enabled: 0
     path: Assets/Scenes/Old map/MapBuild.unity
     guid: 062df3f5b2488334f8430ff53eb0f308
-  - enabled: 0
-    path: Assets/Scenes/Old map/Shop.unity
-    guid: e81c5460dad130c4e8fb7a1a373c9eb3
   - enabled: 1
     path: Assets/Scenes/New Map/Level 1.unity
     guid: 14581a9d9ccd0a5448be13aa38f50149
@@ -26,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Map/Level 4.unity
     guid: cc66c60a20f850e48851965c64868173
+  - enabled: 1
+    path: Assets/Scenes/New Map/Shop.unity
+    guid: e81c5460dad130c4e8fb7a1a373c9eb3
+  - enabled: 1
+    path: Assets/Scenes/New Map/Boss.unity
+    guid: 94f1fd13427b0834bb0febee201edde5
   m_configObjects: {}

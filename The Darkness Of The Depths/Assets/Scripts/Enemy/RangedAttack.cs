@@ -31,8 +31,14 @@ public class RangedAttack : MonoBehaviour
     public LineRenderer aimLine;
     public LineRenderer shootLine;
 
-    public bool aiming, shooting;
+    public bool aiming, shooting, realshooting;
     [SerializeField] private LayerMask enemymask;
+
+    public float colorAddition;
+
+    public Color color;
+    public Color spawncolor;
+   
 
 
     public void Start()
@@ -50,20 +56,31 @@ public class RangedAttack : MonoBehaviour
         ammo = weapon.stats.ammo;
         range = weapon.stats.range;
         shieldDamage = weapon.stats.shieldDamage;
+        spawncolor = color;
+
+
+        colorAddition = 255 / waitingToFireTime * Time.deltaTime;
     }
 
     void Update()
     {
         Debug.DrawRay(firepoint.position, dir, Color.red, 2f);
-        
-
-        
         dir = (player.position - firepoint.position).normalized;
         angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-       
-        
-        
+
+
+
+        if (ai.sniper && !realshooting)
+        {
+            gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+        else if (!ai.sniper)
+        {
+            gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+
+
+
 
 
         if (ai.ai == EnemyAI.Ai.Reloading)
@@ -92,8 +109,9 @@ public class RangedAttack : MonoBehaviour
             }
         }          
         if(shooting)
-        {
+        {          
             shootLine.enabled = true;
+            realshooting = true;
             Debug.DrawRay(transform.position, setDirection, Color.black, 10f);
 
             RaycastHit2D ray = Physics2D.Raycast(transform.position, setDirection, Mathf.Infinity, enemymask);
@@ -102,7 +120,18 @@ public class RangedAttack : MonoBehaviour
                 shootLine.SetPosition(0, firepoint.position);
                 shootLine.SetPosition(1, ray.point);                                       
             }
-        }       
+
+            color = shootLine.endColor;
+            color.r += colorAddition *  Time.deltaTime;
+            color.b -= colorAddition * Time.deltaTime;
+            color.g -= colorAddition * Time.deltaTime;
+            shootLine.endColor = color;
+            shootLine.startColor = color;
+        }
+        else
+        {
+            realshooting = false;
+        }
 
 
     }
@@ -137,7 +166,8 @@ public class RangedAttack : MonoBehaviour
             yield return new WaitForSeconds(waitingToFireTime);
             shooting = false;
             shootLine.enabled = false;
-
+            shootLine.endColor = spawncolor;
+            shootLine.startColor = spawncolor;
             Shoot();
         }
         else
@@ -149,21 +179,25 @@ public class RangedAttack : MonoBehaviour
     }
 
 
-    void Shoot()
+    public void Shoot()
     {
+
+        
         for (int i = 0; i < NumberOfShots; i++)
         {
             GameObject enemyBullet = Instantiate(bulletPrefab, firepoint.position, gun.transform.rotation);
             enemyBullet.transform.Rotate(0, 0, UnityEngine.Random.Range(minSpread, maxSpread));
             EnemyBullet stats = enemyBullet.GetComponent<EnemyBullet>();
+
+
             stats.BulletSpeed = BulletSpeed;
             stats.dmg = damage;
             stats.startLocation = firepoint.position;
             stats.range = range;
             stats.shieldDamage = shieldDamage;
         }
-        ammo--; 
-
+        ammo--;
+        realshooting = false;
         ai.ai = EnemyAI.Ai.searching;
     }
 

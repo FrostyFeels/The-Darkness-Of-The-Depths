@@ -5,7 +5,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private BoxCollider2D bc;
+    public BoxCollider2D bc;
     private float fJumpPressedRemember;
     public float fJumpPressedRememberTime = 0.2f;
 
@@ -32,7 +32,7 @@ public class Jump : MonoBehaviour
         slide = GetComponent<Slide>();
         grapple = GetComponent<Grappeling>();
         jumpsLeft = jumps;
-        bc = GetComponentInChildren<BoxCollider2D>();
+        
         rb = GetComponent<Rigidbody2D>();
     } 
     void Update()
@@ -109,13 +109,13 @@ public class Jump : MonoBehaviour
         {
             chargeTime = 0;
             isChargeJumping = false;
-            rb.velocity = new Vector2(rb.velocity.x, jumpforce * 3);
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce * 3.5f);
         }
     }
 
     public bool IsGrounded()
     {
-        RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, platfromLayerMask);
+        RaycastHit2D raycasthit2d = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .2f, platfromLayerMask);
         return raycasthit2d.collider != null;
     }
 }

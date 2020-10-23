@@ -42,13 +42,9 @@ public class Weapon : MonoBehaviour
     public RangedWeaponStats weapon;
 
     public int whatWeapon;
+    public int shielddmg;
 
     public PlayerHealth health;
-    public SniperSounds sniper;
-    public ShotgunSounds shotgun;
-    public AutoSounds auto;
-    public SemiSounds semi;
-    public PistolSounds pistol;
 
     public AudioClip[] Shooting;
     public AudioClip[] Empty;
@@ -63,7 +59,7 @@ public class Weapon : MonoBehaviour
     {
         
        
-        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        health = GameObject.Find("SpiderPlayer").GetComponent<PlayerHealth>();
         damage = weapon.dmg;
         firepoint = RfirePoint;
         ammo = weapon.ammo;
@@ -76,9 +72,10 @@ public class Weapon : MonoBehaviour
         force = weapon.knockBackForce;
         autoShooting = weapon.autoShooting;
         weaponsprite = weapon.weaponSprite;
+        shielddmg = weapon.shieldDmg;
 
         audioCenter = GameObject.Find("AudioCenter").GetComponent<AudioSource>();
-        Debug.Log(audioCenter);
+
 
         switch (whatWeapon)
         {
@@ -101,14 +98,14 @@ public class Weapon : MonoBehaviour
                 DoneReload = AudioManager.aDoneReload;
                 return;
             case 3:
-                Shooting = AudioManager.ssShot;
-                Empty = AudioManager.ssEmpty;
-                Reloading = AudioManager.ssReload;
+                Shooting = AudioManager.shShot;
+                Empty = AudioManager.shEmpty;
+                Reloading = AudioManager.shReload;
                 return;       
             case 4:
-                Shooting = AudioManager.sssShot;
-                Empty = AudioManager.sssEmpty;
-                Reloading = AudioManager.sssReload;
+                Shooting = AudioManager.snShot;
+                Empty = AudioManager.snEmpty;
+                Reloading = AudioManager.snReload;
                 return;
         }
 
@@ -117,6 +114,8 @@ public class Weapon : MonoBehaviour
 
 
     }
+
+    
 
     private void OnEnable()
     {
@@ -146,15 +145,13 @@ public class Weapon : MonoBehaviour
 
         dir = (mouse.position - transform.position);
         dir.Normalize();
-
-
         angle = Mathf.Atan2(dir.y, dir.x);
         transform.rotation = quaternion.Euler(0, 0, angle);
 
         if(reloading && Input.GetMouseButtonDown(0))
         {
             audioCenter.PlayOneShot(Empty[UnityEngine.Random.Range(0, Empty.Length)]);
-            audioCenter.volume = 0.1f;
+            audioCenter.volume = 0.2f;
         }
 
         if (reloading)
@@ -212,6 +209,7 @@ public class Weapon : MonoBehaviour
             bulletstats.piercingReduction = weapon.piercingReduction;
             bulletstats.force = force;
             bulletstats.dir = dir;
+            bulletstats.shieldDmg = shielddmg;
         }
         ammo--;
         rb.velocity += -dir * force;
@@ -224,16 +222,20 @@ public class Weapon : MonoBehaviour
         ammo = 0;
         audioCenter.PlayOneShot(Reloading[UnityEngine.Random.Range(0, Reloading.Length)]);
         audioCenter.volume = 0.1f;
-        
-        health.TakeDamage(weapon.lifeSteal);
+        if(reloading)
+        {
+            health.TakeDamage(weapon.lifeSteal);
+        }
+  
         reloading = true;
         yield return new WaitForSeconds(reloadSpeed);
-        audioCenter.PlayOneShot(DoneReload[UnityEngine.Random.Range(0, DoneReload.Length)]);
+        if(whatWeapon == 4 || whatWeapon == 5)
+        {
+            audioCenter.PlayOneShot(DoneReload[UnityEngine.Random.Range(0, DoneReload.Length)]);
+        }
+    
         ammo = maxAmmo;
         reloading = false;
     }
 }
 
-public class PistolSound
-{
-}

@@ -16,6 +16,9 @@ public class Grappeling : MonoBehaviour
     public Transform Player;
     public Rigidbody2D playerRB;
 
+    public float grappleTime;
+    public float maxGrappleTime;
+
 
     private Vector3 grapplehitpos;
 
@@ -79,6 +82,18 @@ public class Grappeling : MonoBehaviour
             target = null;
             lr.enabled = false;
         }
+
+
+        if(grappling)
+        {
+            grappleTime += Time.deltaTime;
+            if(grappleTime >= maxGrappleTime)
+            {
+                grappling = false;
+                grappleTime = 0;
+            }
+        }
+        else { grappleTime = 0; }
     }
 
 

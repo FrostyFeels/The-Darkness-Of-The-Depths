@@ -148,7 +148,13 @@ MonoBehaviour:
   sprite: {fileID: 4225292739479417739}
   FirePointSprite: {fileID: 4225292740680406437}
   weapon: {fileID: 11400000, guid: e082b47b73912e747a57347ccfdb8629, type: 2}
+  whatWeapon: 4
+  shielddmg: 0
   health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &4225292739827777694
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +273,13 @@ MonoBehaviour:
   sprite: {fileID: 4225292739827777689}
   FirePointSprite: {fileID: 4225292740455672711}
   weapon: {fileID: 11400000, guid: 864a40e267e372149b3921d4fbd7b53b, type: 2}
+  whatWeapon: 0
+  shielddmg: 0
   health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &4225292739853677167
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +641,13 @@ MonoBehaviour:
   sprite: {fileID: 4225292740379987330}
   FirePointSprite: {fileID: 4225292740864212554}
   weapon: {fileID: 11400000, guid: eb33631c1f92f9240b2e187c222df46a, type: 2}
+  whatWeapon: 2
+  shielddmg: 0
   health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &4225292740389174370
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +766,13 @@ MonoBehaviour:
   sprite: {fileID: 4225292740389174300}
   FirePointSprite: {fileID: 4225292739899957783}
   weapon: {fileID: 11400000, guid: c8035e7b85b41b148b6ac58cde32cfaf, type: 2}
+  whatWeapon: 3
+  shielddmg: 0
   health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &4225292740455672709
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +972,13 @@ MonoBehaviour:
   sprite: {fileID: 4225292740613201015}
   FirePointSprite: {fileID: 4225292740366640655}
   weapon: {fileID: 11400000, guid: 6b315840cbb06cd49a9c8739f6e1056e, type: 2}
+  whatWeapon: 1
+  shielddmg: 0
   health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &4225292740680406443
 GameObject:
   m_ObjectHideFlags: 0

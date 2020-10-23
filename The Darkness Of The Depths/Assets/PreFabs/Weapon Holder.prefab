@@ -147,6 +147,13 @@ MonoBehaviour:
   sprite: {fileID: 5357271837624985400}
   FirePointSprite: {fileID: 5357271838821482774}
   weapon: {fileID: 11400000, guid: e082b47b73912e747a57347ccfdb8629, type: 2}
+  whatWeapon: 4
+  shielddmg: 0
+  health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &5357271837801817820
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  UI: {fileID: 0}
+  pistolWeapon: 0
 --- !u!1 &5357271837830714413
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +322,13 @@ MonoBehaviour:
   sprite: {fileID: 5357271837830714410}
   FirePointSprite: {fileID: 5357271838525751092}
   weapon: {fileID: 11400000, guid: 864a40e267e372149b3921d4fbd7b53b, type: 2}
+  whatWeapon: 0
+  shielddmg: 0
+  health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &5357271838041077414
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +557,13 @@ MonoBehaviour:
   sprite: {fileID: 5357271838315551025}
   FirePointSprite: {fileID: 5357271838942374649}
   weapon: {fileID: 11400000, guid: eb33631c1f92f9240b2e187c222df46a, type: 2}
+  whatWeapon: 2
+  shielddmg: 0
+  health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &5357271838324730065
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +681,13 @@ MonoBehaviour:
   sprite: {fileID: 5357271838324730031}
   FirePointSprite: {fileID: 5357271838041077412}
   weapon: {fileID: 11400000, guid: c8035e7b85b41b148b6ac58cde32cfaf, type: 2}
+  whatWeapon: 3
+  shielddmg: 0
+  health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &5357271838381929150
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +967,13 @@ MonoBehaviour:
   sprite: {fileID: 5357271838620321988}
   FirePointSprite: {fileID: 5357271838381929148}
   weapon: {fileID: 11400000, guid: 6b315840cbb06cd49a9c8739f6e1056e, type: 2}
+  whatWeapon: 1
+  shielddmg: 0
+  health: {fileID: 0}
+  Shooting: []
+  Empty: []
+  Reloading: []
+  DoneReload: []
 --- !u!1 &5357271838753395900
 GameObject:
   m_ObjectHideFlags: 0

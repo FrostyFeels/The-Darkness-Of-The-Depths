@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: 
   HP: 75
-  damage: 9
+  damage: 25
   attackRange: 75
+  range: 100
   movementSpeed: 8
   Size: 1
   armor: 2
@@ -28,4 +29,3 @@ MonoBehaviour:
   BulletSpeed: 25
   NumberOfShots: 1
   ammo: 13
-  range: 100

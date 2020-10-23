@@ -791,10 +791,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 597243613
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c86fef703405b8c419dd4ed2585804a4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1112,6 +1112,10 @@ MonoBehaviour:
   platfromLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  EnemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  facingRight: 1
   movement: {x: 0, y: 0, z: 0}
   sprintMultiplayer: 1.5
   moveSpeed: 0
@@ -1119,6 +1123,15 @@ MonoBehaviour:
   maxSpeed: 15
   timeToReachMaxSpeed: 0.25
   rotation: -3
+  startLocation: []
+  startNumber: 0
+  moving: []
+  firstspawn: 0
+  yeetTimer: 0
+  maxEnemyStandTime: 1
+  flying: 0
+  flyTimer: 0.25
+  maxFlyTime: 0
 --- !u!114 &2418903133922451782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034adf76e3831fe498dc4c2e1c51af2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 7838227312918765581}
   normalCollider: {fileID: 3292329107478193705}
   slideSpeed: 25
   isSliding: 0
@@ -1181,6 +1195,8 @@ MonoBehaviour:
   Mouse: {fileID: 0}
   Player: {fileID: 0}
   playerRB: {fileID: 7838227311772798086}
+  grappleTime: 0
+  maxGrappleTime: 0.25
   grappling: 0
   grappleForce: 75
   jumpforce: 5
@@ -1197,7 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 150
-  regen: 0.05
+  regen: 0
   armor: 2
   maxHealth: 150
 --- !u!114 &5092362473512498979
@@ -1212,10 +1228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54d8e2b8e78e654f91d77f0b674b35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bc: {fileID: 0}
   fJumpPressedRememberTime: 0.2
   jumps: 1
   jumpsLeft: 0
-  jumpforce: 25
+  jumpforce: 30
   fallMultiplier: 3.5
   lowJumpMultiplier: 3.25
   timeToCharge: 2
@@ -1359,6 +1376,7 @@ MonoBehaviour:
   shieldSprite: {fileID: 7838227312837527556}
   shield: {fileID: 7838227312837527563}
   hp: 4
+  dead: 0
 --- !u!1 &7838227312697698081
 GameObject:
   m_ObjectHideFlags: 0

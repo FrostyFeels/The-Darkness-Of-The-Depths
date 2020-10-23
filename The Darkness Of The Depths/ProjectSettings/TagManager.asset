@@ -17,6 +17,9 @@ TagManager:
   - Tank
   - Cursor
   - Shield
+  - BossShield
+  - WallFloor
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -42,8 +45,8 @@ TagManager:
   - wallJumpArea
   - Shield
   - EnemyBullet
-  - 
-  - 
+  - BossShield
+  - WallFloor
   - 
   - 
   - 
